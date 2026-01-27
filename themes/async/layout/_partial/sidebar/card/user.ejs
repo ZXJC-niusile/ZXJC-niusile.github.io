@@ -1,0 +1,21 @@
+<!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <%- swich_imgs([theme.user.avatar,theme.user.dark_avatar], { alt:"Avatar", class:"trm-avatar" }) %>
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        <%= theme.user.name %>
+    </h5>
+    <%
+			let typedText = theme?.sidebar?.typedText || theme?.sidebar?.typed_text;
+			if(typedText && Array.isArray(typedText) && typedText.length>0) {
+		%>
+        <div class="trm-label">
+            <%= theme.sidebar.typedTextPrefix || theme.sidebar.typed_text_prefix %>
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    <% } %>
+</div>
+<!-- card header end -->

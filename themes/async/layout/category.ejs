@@ -1,0 +1,11 @@
+<% let banner = page.banner || {}; %>
+<% let def_banner = theme.banner.category || theme.banner.archive || {}; %>
+<%- partial(theme.layout.main,  {
+    banner: partial(theme.layout.banner,  {
+        ...theme.banner.default,
+        banner_title: page.title,
+        ...def_banner,
+				...banner
+    }),
+    content: is_category() ? partial(theme.layout.page_archive) : partial(theme.layout.page_category)
+}) %>

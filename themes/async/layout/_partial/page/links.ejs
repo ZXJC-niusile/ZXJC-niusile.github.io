@@ -1,0 +1,57 @@
+<div class="row trm-scroll-animation" style="margin-bottom: var(--card-bottom-card);">
+    <div class="col-lg-12">
+        <blockquote>
+            <%-__('site.rule_text')%>：
+            <br>
+            <%- theme.links_info.rule_text || theme.user.ruleText || theme.user.rule_text %>
+        </blockquote>
+    </div>
+</div>
+
+<div class="row trm-scroll-animation" >
+    <div class="col-lg-12">
+        <h5 class="trm-title-with-divider"><%-__('site.title')%><span data-number="01"></span></h5>
+    </div>
+    <div class="col-lg-12">
+        <div class="trm-card trm-scroll-animation trm-active-el">
+            <ul class="trm-list">
+								<li><%-__('site.webmaster')%>：<%- theme.links_info.name || theme.user.name %></li>
+								<li><%-__('site.domain')%>：<%- theme.links_info.url || theme.user.domain %></li>
+								<li><%-__('site.avatar')%>：<%- full_url_for(theme.links_info.avatar) || full_url_for(theme.user.avatar) %></li>
+								<li><%-__('site.describe')%>：<%- theme.links_info.describe || theme.user.describe %></li>
+            </ul>
+        </div>
+    </div>    
+</div>
+
+<% if(Array.isArray(theme.links)){ %>
+	<div class="row trm-scroll-animation" >
+    <div class="col-lg-12">
+        <h5 class="trm-title-with-divider">
+            <%-__('title.links')%>
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    <%  theme.links.forEach(item=>{%>
+        <div class="col-lg-6">
+            <a href='<%- item.url %>' target='_blank' rel="nofollow">
+                <div class="trm-link-box trm-scroll-animation trm-p-20">
+                    <div class="trm-link-content">
+                        <div class="trm-icon">
+                            <img draggable="false" <%- onerror('flink') %> alt="<%- item.name %>" src="<%- item.image %>">
+                        </div>
+                        <div class="trm-link-text">
+                            <h6 class="trm-mb-10"><%- item.name %></h6>
+                            <div><%- item.desc ? truncate(item.desc,{length:32}) : '' %></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    <%})%>
+</div>
+<% } %>
+
+<% if(page.comments) { %>
+    <%- partial(theme.layout.comment) %>
+<% } %>
