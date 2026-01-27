@@ -39,7 +39,7 @@ favicon:
   webmanifest: # Webmanifest | 应用程序清单文件
   visibilitychange: true # Enable toggle title display when leaving | 开启离开时切换标题显示
   hidden: /failure.ico # Displays an icon when not visible | 离开窗口时显示图标
-  show_text:  # Displays text when the window is activated | 激活窗口时显示文字
+  show_text: '' # Displays text when the window is activated | 激活窗口时显示文字
   hide_text: 通衢平野，尘嚣无痕 # Leave the window to display text | 离开窗口显示文字
 
 # Theme resource files or plug-ins | 插件配置
