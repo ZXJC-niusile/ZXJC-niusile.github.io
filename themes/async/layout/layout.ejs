@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="<%- config.language %>">
+
+<head>
+  <%- partial(theme.layout.head) %>
+</head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <%- partial(theme.layout.page_loading) %>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <%- partial(theme.layout.mode_change) %>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <%- partial(theme.layout.header) %>
+            <!-- top bar end -->
+
+            <!-- body -->
+            <%- body %>
+            <!-- body end -->
+
+            <%- partial(theme.layout.post_toc) %>
+            <%- partial(theme.layout.fixed_btn) %>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  <%- partial(theme.layout.search) %>
+  <%- partial(theme.layout.script) %>
+
+</body>
+
+</html>

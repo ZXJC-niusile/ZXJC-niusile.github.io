@@ -1,0 +1,28 @@
+<%
+let is_toc = is_post() && (theme.toc.enable && page.toc !== false )
+let toc_content = '';
+if(is_toc){
+  toc_content = toc(page.content, {list_number: theme.toc.list_number, max_depth: theme.toc.max_depth, min_depth: theme.toc.min_depth});
+  is_toc = is_toc  && toc_content.length > 1;
+}
+%>
+<div class="trm-fixed-container">
+    <% if(is_toc) { %>
+        <div class="trm-fixed-btn post-toc-btn" data-title="<%- __('rightside.toc_title') %>">
+            <%- icon(theme.icons.toc_tag) %>
+        </div>
+    <% } %>
+    <% if(is_post() && theme.rightside.readmode) { %>
+        <div class="trm-fixed-btn" data-title="<%- __('rightside.readmode_title') %>" onclick="asyncFun.switchReadMode()">
+            <%- icon(theme.icons.read) %>
+        </div>
+    <% } %>
+    <% if(theme.rightside.aside && !page.single_column) { %>
+        <div class="trm-fixed-btn hidden-md" data-title="<%- __('rightside.aside') %>" onclick="asyncFun.switchSingleColumn()">
+            <%- icon(theme.icons.arrows) %>
+        </div>
+    <% } %>
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="<%- __('rightside.back_to_top') %>">
+        <%- icon(theme.icons.back_top) %>
+    </div>
+</div>
