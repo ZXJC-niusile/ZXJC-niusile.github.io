@@ -1,8 +1,36 @@
 <div class="trm-main-card-frame trm-sidebar">
-    <div class="trm-main-card"> 
-        <%- partial(theme.layout.sidebar_user) %>
-        <%- partial(theme.layout.sidebar_social) %>
-        <%- partial(theme.layout.sidebar_info) %>
-        <%- partial(theme.layout.sidebar_email) %>
+    <div class="trm-main-card">
+        <!-- 折叠按钮（仅手机端显示） -->
+        <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
+            个人信息 <span class="toggle-icon">▼</span>
+        </button>
+        <!-- 可折叠内容区域 -->
+        <div class="sidebar-collapsible-content">
+            <%- partial(theme.layout.sidebar_user) %>
+            <%- partial(theme.layout.sidebar_social) %>
+            <%- partial(theme.layout.sidebar_info) %>
+            <%- partial(theme.layout.sidebar_email) %>
+        </div>
     </div>
 </div>
+
+<script>
+function toggleSidebar() {
+    const btn = document.querySelector('.sidebar-toggle-btn');
+    const content = document.querySelector('.sidebar-collapsible-content');
+    btn.classList.toggle('collapsed');
+    content.classList.toggle('collapsed');
+}
+
+// 默认在手机端折叠
+if (window.innerWidth <= 767) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.querySelector('.sidebar-toggle-btn');
+        const content = document.querySelector('.sidebar-collapsible-content');
+        if (btn && content) {
+            btn.classList.add('collapsed');
+            content.classList.add('collapsed');
+        }
+    });
+}
+</script>

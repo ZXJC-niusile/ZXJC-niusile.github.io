@@ -1,0 +1,197 @@
+/* ========================================
+   自定义响应式样式 & 侧边栏折叠
+   ======================================== */
+
+/* ========== 响应式断点适配 ========== */
+
+/* 大屏幕 (>1200px) - 默认 */
+@media (min-width: 1200px) {
+    .projects-title {
+        font-size: 2.8em;
+    }
+
+    .section-title {
+        font-size: 1.6em;
+    }
+}
+
+/* 中等屏幕 (992px - 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .projects-title {
+        font-size: 2.4em;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+}
+
+/* 平板 (768px - 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .projects-title {
+        font-size: 2.2em;
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+
+    .projects-grid {
+        gap: 15px;
+    }
+}
+
+/* 手机 (<768px) */
+@media (max-width: 767px) {
+    .projects-title {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+
+    .projects-title::after {
+        font-size: 0.9em;
+    }
+
+    .section-title {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .section-title span {
+        transform: skewX(5deg);
+    }
+
+    .section-title span::before {
+        font-size: 0.65em;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .project-card {
+        margin-bottom: 15px;
+    }
+
+    /* 禁用手机端hover效果 */
+    .project-card:hover {
+        transform: none;
+    }
+
+    .project-card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ========== 侧边栏折叠（手机端） ========== */
+
+/* 折叠按钮样式 */
+.sidebar-toggle-btn {
+    display: none;
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--theme-bg-color, #fcfcfe);
+    border: 1px solid var(--primary-30, rgba(175, 180, 43, 0.3));
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--theme-color, #00283a);
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.sidebar-toggle-btn:hover {
+    background: var(--primary-30, rgba(175, 180, 43, 0.3));
+}
+
+.sidebar-toggle-btn .toggle-icon {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.sidebar-toggle-btn.collapsed .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* 侧边栏内容区域 */
+.sidebar-collapsible-content {
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+    overflow: hidden;
+}
+
+/* 手机端显示折叠按钮和折叠功能 */
+@media (max-width: 767px) {
+    .sidebar-toggle-btn {
+        display: block;
+    }
+
+    .sidebar-collapsible-content {
+        max-height: 1000px;
+        opacity: 1;
+    }
+
+    .sidebar-collapsible-content.collapsed {
+        max-height: 0;
+        opacity: 0;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* 侧边栏卡片在手机端的优化 */
+    .trm-main-card {
+        padding: 15px !important;
+    }
+
+    .trm-mc-header {
+        padding-bottom: 10px;
+    }
+
+    .trm-avatar-frame {
+        margin-bottom: 10px !important;
+    }
+
+    .trm-avatar {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
+
+/* 小屏手机 (<480px) */
+@media (max-width: 479px) {
+    .projects-title {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+    }
+
+    .section-title {
+        font-size: 1.2em;
+    }
+
+    .section-title span::before {
+        font-size: 0.55em;
+        letter-spacing: 1px;
+    }
+}
+
+/* ========== ABOUT 页面内容下移 ========== */
+/* 避免内容与banner背景重叠 */
+.trm-publication {
+    margin-top: 30px;
+}
+
+.trm-publication .trm-card:first-child {
+    margin-top: 20px;
+}
+
+/* ABOUT页面标题样式优化 */
+.trm-publication h2:first-of-type {
+    margin-top: 15px;
+    padding-top: 10px;
+}
