@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Hexo 博客搭建指南</title>
+      <link href="/2026/01/26/Hexo-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/"/>
+      <url>/2026/01/26/Hexo-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2026/01/24/md%E8%AF%AD%E6%B3%95%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95/"/>
+      <url>/2026/01/24/md%E8%AF%AD%E6%B3%95%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<!--���⣺ʹ��#��������ʾ��ͬ����ı��⡣һ��#��һ�����⣬����##�Ƕ������⣬�Դ����ƣ���ൽ�������⡣--><h1 id="һ������"><a href="#һ������" class="headerlink" title="һ������"></a>һ������</h1><h2 id="��������"><a href="#��������" class="headerlink" title="��������"></a>��������</h2><h3 id="��������-1"><a href="#��������-1" class="headerlink" title="��������"></a>��������</h3><!--�����뻻��--><p>����ֱ��д�ı������γɶ��䣻<br>�����Ҫ��ͬһ���ڻ��У���������β���������ո��س���</p><!--ǿ��--><!--ʹ��*��_�����б��--><p>���磺<em>б������</em> �� <em>б������</em></p><!--ʹ��**��__����Ǵ���--><p>���磺**��������** �� <strong>��������</strong></p><!--�����б�ʹ��*��+��-��Ϊ�б�����--><p>*��һ��<br>+�ڶ���<br>-������</p><!--�����б�ͨ�����ּӵ�ķ�ʽ����--><p>1.��һ��<br>2.�ڶ���<br>3.������</p><!--���Ӻ�ͼƬ��--><!--���ӣ�ʹ�÷�����[]����Բ����()����ʽ���磺[��������](http://url)--><!--ͼƬ���������ӣ����ڿ�ͷ���ϸ�̾��!���磺![�������](ͼƬ����)--><!--����--><!--ʹ�ô��ں�>��Ϊ���õı��-->]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2026/01/24/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/"/>
+      <url>/2026/01/24/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%A5%E9%97%A8%E5%88%B0%E7%B2%BE%E9%80%9A/</url>
+      
+        <content type="html"><![CDATA[<p>[TOC]</p><ul><li>扎西尖措</li></ul><h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h1 id="MySQL概述"><a href="#MySQL概述" class="headerlink" title="MySQL概述"></a>MySQL概述</h1><ul><li>主要介绍两个部分<ul><li>数据库相关概念</li><li>MySQL数据库的介绍、下载、安装、启动及连接</li></ul></li></ul><h2 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h2><p>  三个数据库概念：数据库(DB)、数据库管理系统(DBMS)、SQL。</p><table><thead><tr><th align="center">名称</th><th align="center">全称</th><th align="center">简称</th></tr></thead><tbody><tr><td align="center">数据库</td><td align="center">存储数据的仓库，数据是有组织的进行存储</td><td align="center">DataBase (DB)</td></tr><tr><td align="center">数据库管理系统</td><td align="center">操纵和管理数据库的大型软件</td><td align="center">DataBase Management System (DBMS)</td></tr><tr><td align="center">SQL</td><td align="center">操作关系型数据库的编程语言，定义了一套操作关系型数据库统一标准</td><td align="center">Structured Query Language (SQL)</td></tr></tbody></table>   <img src="E:\笔记，文档\markdown图片\数据库关系组成图.png" alt="数据库关系组成图"   data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/><p><strong>通过主机使用SQL语言操作DBMS，管理数据库</strong></p><p>​    不论我们使用的是哪一个关系型数据库，最终在操作时，都是使用SQL语言来进行统一操作， 因为SQL语言，是操作关系型数据库的<span style="color:red;">统一标准</span>。</p><h2 id="MySQL数据库"><a href="#MySQL数据库" class="headerlink" title="MySQL数据库"></a>MySQL数据库</h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>官方： <a href="https://www.mysql.com/">https://www.mysql.com/</a> </p><p>MySQL官方提供了两种不同的版本： </p><ul><li><p>社区版本（MySQL Community Server）<br>免费， MySQL不提供任何技术支持 </p></li><li><p>商业版本（MySQL Enterprise Edition）<br>收费，可以使用30天，官方提供技术支持</p><p>该笔记学习相关内容使用MySQL社区版-MySQL Community Server 8.0.42</p><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>官方： <a href="https://www.mysql.com/">https://www.mysql.com/</a> </p><img src="E:\笔记，文档\markdown图片\MySQL下载.png" alt="MySQL下载" style="zoom:50%;"   data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol><li>双击官方下来的安装包文件</li><li>按照指引和个人使用需求进行安装</li><li>安装相关MySQL组件时时间可能较长或失败,可尝试开启VPN再次尝试</li><li><span style="color:red "> 一定记住输入MySQL中root用户的密码</span></li><li>配置<ul><li>在安装完毕后配置环境变量,保证可以在任何目录下连接MySQL</li><li>打开”高级系统设置”,选择环境变量</li><li>找到 Path 系统变量,点击’’编辑’’</li><li>选择 “新建” , 将MySQL Server的安装目录下的bin目录添加到环境变量</li></ul></li></ol><h3 id="启动停止"><a href="#启动停止" class="headerlink" title="启动停止"></a>启动停止</h3><p>MySQL安装完成之后，在系统启动时，会自动启动MySQL服务，我们无需手动启动。 </p><p>也可以手动的通过指令启动停止，以管理员身份运行cmd，进入命令行执行如下指令</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> <span class="built_in">start</span> mysql80</span><br><span class="line"><span class="built_in">net</span> stop mysql80</span><br></pre></td></tr></table></figure><p>注意 ： 上述的 mysql80 是我们在安装MySQL时，默认指定的mysql的系统服务名，不是固定的，使用时依照自己情况定。</p><h3 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h3><ol><li>方式一：使用MySQL提供的客户端命令行工具</li></ol><ul><li>打开MySQL 8.0 Command Line Client</li><li>输入安装MySQL时自己设置的密码</li></ul><ol start="2"><li>方式二：使用系统自带的命令行工具执行指令</li></ol>   <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> mysql  [-h <span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>]  [-P <span class="number">3306</span>]  -u root -p</span><br><span class="line">参数：</span><br><span class="line">-h : MySQL服务所在的主机IP</span><br><span class="line">-P : MySQL服务端口号， 默认<span class="number">3306</span></span><br><span class="line">-u : MySQL数据库用户名</span><br><span class="line">-p : MySQL数据库用户名对应的密码</span><br></pre></td></tr></table></figure><p>   []内为可选参数，如果需要连接远程的MySQL，需要加上这两个参数来指定远程主机IP、端口，如果 连接本地的MySQL，则无需指定这两个参数。</p><p>   <strong>注意： 使用这种方式进行连接时，需要安装完毕后配置PATH环境变量。</strong></p><h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><ol><li><p>关系型数据库 ( RDBMS )</p><p>概念：建立在关系模型基础上，由多张相互连接的二维表组成的数据库。</p><ul><li><p>二维表：由行和列组成的表</p></li><li><p>基于二维表存储数据的数据库就成为关系型数据库</p></li><li><p>不是基于二维表存储数据的数据库，就是非关系型数据库</p><p>   <strong>特点</strong></p><ol><li>使用表存储数据，格式统一，便于维护。</li><li>使用SQL语言操作，标准统一，使用方便。</li></ol></li></ul></li><li><p>数据模型</p><p>MySQL是关系型数据库，是基于二维表进行数据存储的，具体的结构图下:</p></li></ol><img src="E:\笔记，文档\markdown图片\MySQL数据库数据储存流程结构图.png" alt="MySQL数据库数据储存流程结构图"   data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'/>   </li><li><p>我们可以通过MySQL客户端连接数据库管理系统DBMS，然后通过DBMS操作数据库。</p></li><li><p>可以使用SQL语句，通过数据库管理系统操作数据库，以及操作数据库中的表结构及数据。</p></li><li><p>一个数据库服务器中可以创建多个数据库，一个数据库中也可以包含多张表，而一张表中又可以包 含多行记录。</p></li></ul><h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>​      全称 Structured  Query Language，结构化查询语言。操作关系型数据库的编程语言，定义了 一套操作关系型数据库统一<strong>标准</strong> 。</p><h2 id="SQL通用语法"><a href="#SQL通用语法" class="headerlink" title="SQL通用语法"></a>SQL通用语法</h2><ol><li><p>SQL语句可以单行或多行书写，以分号结尾。</p></li><li><p>SQL语句可以使用空格&#x2F;缩进来增强语句的可读性。</p></li><li><p>MySQL数据库的SQL语句不区分大小写，关键字建议使用大写。</p></li><li><p>注释：</p><ul><li>单行注释：– 注释内容  或  # 注释内容</li><li>多行注释：&#x2F;* 注释内容 *&#x2F;</li></ul><h2 id="SQL分类"><a href="#SQL分类" class="headerlink" title="SQL分类"></a>SQL分类</h2><p> SQL语句，根据其功能，主要分为四类：DDL、DML、DQL、DCL。</p><p>| 分类 | 全称 | 说明 |<br>| :—-: |: —-: | :—-: |<br>| DDL  | Data Definition Language | 数据定义语言，用来定义数据库对象 (数据库, 表, 字段) |<br>| DML  | Data Manipulation Language | 数据操作语言，用来对数据库表中的数据进行增删改       |<br>| DQL  | Data Query Language     | 数据查询语言，用来查询数据库中表的记录               |<br>| DCL  | Data Control Language   | 数据控制语言，用来创建数据库用户、控制数据库的访问权限 |</p></li></ol><p>​     </p><p>​    </p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2026/01/24/hello-world/"/>
+      <url>/2026/01/24/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2026/01/24/OpenCV%E5%9F%BA%E7%A1%80/"/>
+      <url>/2026/01/24/OpenCV%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的第一篇博客文章</title>
+      <link href="/2025/06/25/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/"/>
+      <url>/2025/06/25/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="开源万岁"><a href="#开源万岁" class="headerlink" title="开源万岁"></a>开源万岁</h3>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JavaWeb开发</title>
+      <link href="/2025/05/30/JavaWeb%E5%BC%80%E5%8F%91/"/>
+      <url>/2025/05/30/JavaWeb%E5%BC%80%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<ul><li>扎西尖措</li></ul><h1 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h1><h2 id="前端开发"><a href="#前端开发" class="headerlink" title="前端开发"></a>前端开发</h2><ol><li>Web前端开发技术栈：HTML、CSS、JS</li><li>异步交互技术：Ajax、Axios</li><li>前端js框架：vue、基于vue的桌面端组件库Element</li><li>前端工程化，vue脚手架</li></ol><h2 id="后端开发"><a href="#后端开发" class="headerlink" title="后端开发"></a>后端开发</h2><ol><li>Java项目构建工具Maven</li><li>SpringBoot基础（Spring的IOC、DI等）</li><li>基于SpringBoot学习SpringMVC基础</li><li>MySQL</li><li>通过Java语言操作关系型数据库（JDBC、Mybatis）</li></ol><h2 id="案例设计"><a href="#案例设计" class="headerlink" title="案例设计"></a>案例设计</h2><ol><li>基于SpringBoot整合SSM**（Spring + Spring MVC + MyBatis）**，根据页面原型，需求，接口文档编写接口</li><li>会话跟踪技术:Cookie、Session、令牌技术（JWT）</li><li>令牌的统一校验（Filter、Interceptor）</li><li>AOP</li><li>SpringBoot底层原理</li></ol><p><span style="color:blue">前后端分离开发，基于接口交互（接口文档）。</span></p><p><span style="color:blue">前端-基于vue脚手架，构建工程化前端项目。</span></p><p><span style="color:blue">后端-基于主流SpringBoot高效学习SSM。</span></p><p><span style="color:blue">通过案例贯穿整个课程体系，学以致用。</span></p><p><span style="color:blue">参照企业开发模式，需求分析-表结构设计-接口文档-功能实现-测试。</span></p><h2 id="Web网站的开发模式"><a href="#Web网站的开发模式" class="headerlink" title="Web网站的开发模式"></a>Web网站的开发模式</h2><h3 id="前后端分离开发"><a href="#前后端分离开发" class="headerlink" title="前后端分离开发"></a>前后端分离开发</h3><p>浏览器向前端服务器发送请求，前端程序响应后浏览器向后端服务器发送请求，Java程序向数据库发送请求，数据库响应后Java程序再返回到浏览器响应</p><h3 id="前后端程序混合开发"><a href="#前后端程序混合开发" class="headerlink" title="前后端程序混合开发"></a>前后端程序混合开发</h3><p>前后端程序均在一台服务器上，浏览器向服务器发送请求后，服务器将数据和前端代码一起返回给浏览器</p><p>前后端分离式开发占比远远大于前后端程序混合开发</p><h2 id="Web前端开发"><a href="#Web前端开发" class="headerlink" title="Web前端开发"></a>Web前端开发</h2><p>网页组成部分：<span style="color:red">文字、图片、音频、视频、超链接等</span></p><p>我们所看到的的网页背后的本质就是程序员所编写的<span style="color:red">前端代码</span></p><p><span style="color:#000000">前端代码通过</span><span style="color:red">浏览器转</span><span style="color:#000000">化（解析和渲染）成用户看到的网页</span> </p><p><span style="color:#000000">浏览器中对代码进行渲染的部分，称为</span><span style="color:red">浏览器内核</span></p><p><em>不同的浏览器，内核不同，对于相同的的前端代码解析的效果会存在差异。</em></p><h3 id="Web标准"><a href="#Web标准" class="headerlink" title="Web标准"></a>Web标准</h3><ul><li><p>Web标准也称为网页标准，由一系列的标准组成，大部分由w3C（Word Wide Web Consortium,万维网联盟）负责制定。</p></li><li><p>三个组成部分：</p></li></ul><ol><li><p>HTML：负责<span style="color:#FF0000">网页的结构</span>（页面元素和内容）</p></li><li><p>CSS:负责<span style="color:#FF0000">网页的表现</span>（页面元素的外观、位置等页面样式，如：颜色、大小等）。</p></li><li><p>JavaScript:负责<span style="color:#FF0000">网页的行为</span><span style="color:#000000">（交互效果）。</span></p></li></ol><h4 id="HTML（超文本标记语言）"><a href="#HTML（超文本标记语言）" class="headerlink" title="HTML（超文本标记语言）"></a>HTML（超文本标记语言）</h4><p>超文本：超越文本的限制，比普通文本更强大，除了文字信息，还可以定义图片，音频，视频等内容。</p><p>标记语言：由标签构成的语言</p><p>HTML标签都是<span style="color:#FF0000">预定义</span>好的。例如：使用<a>展示超链接，使用<img>展示图片，<video  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'>展示视频。</p><p>HTML代码直接在浏览器中运行，HTML标签由浏览器解析。</p><h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><ul><li>CSS(Cascading Style Sheet) : 层叠样式表，用于控制页面样式(表现)。</li></ul><h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><p><strong>HTML快速入门</strong></p><ol><li><p>新建文本文件，后缀名为.html</p></li><li><p>编写HTML结构标签</p></li><li><p>在<body>中填写内容</p></li><li><p>HTML结构标签</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>标题<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span>    </span><br></pre></td></tr></table></figure></li><li><p>特点</p><ul><li><p>HTML标签不区分大小写</p></li><li><p>HTML标签属性值单双引号都可以</p></li><li><p>HTML语法松散</p><h3 id="HTML基础标签-样式"><a href="#HTML基础标签-样式" class="headerlink" title="HTML基础标签&amp;样式"></a>HTML基础标签&amp;样式</h3><p>新浪新闻示例</p><ul><li><p>新浪新闻-标题</p><ul><li>标题排版</li><li>标题样式</li><li>超链接</li></ul></li><li><h2 id="新浪新闻-正文"><a href="#新浪新闻-正文" class="headerlink" title="新浪新闻-正文"></a>新浪新闻-正文</h2></li></ul><h4 id="新浪微博-实现标题-排版"><a href="#新浪微博-实现标题-排版" class="headerlink" title="新浪微博-实现标题-排版"></a>新浪微博-实现标题-排版</h4><ul><li><p><strong>图片标签</strong> :<strong><span style="color:blue"><img></span  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></strong></p><ul><li><span style="color:red">src</span>:指定图像的url ( 绝对路径 &#x2F; 相对路径 )</li><li><span style="color:red">width</span>:图像的宽度 ( 像素 &#x2F; 相对于父元素的百分比 )</li><li><span style="color:red">height</span>:图像的高度 ( 像素 &#x2F; 相对于父元素的百分比 )</li></ul></li><li><p>标题标签**<span style="color:blue"><h1> - <h6></span>**</p></li><li><p>水平线标签:<strong><span style="color:blue"><hr></span></strong></p></li><li></li></ul></li></ul></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> JavaWeb </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
