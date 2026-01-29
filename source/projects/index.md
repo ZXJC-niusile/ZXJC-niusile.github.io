@@ -19,20 +19,67 @@ date: 2026-01-27 11:10:20
 }
 .project-section {
   padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.project-section::before {
+  content: attr(data-subtitle);
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-8deg);
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--theme-color, #333);
+  opacity: 0.08;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: 2px;
 }
 .section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   font-size: 1.6em;
   font-weight: bold;
   margin-bottom: 25px;
-  padding-bottom: 12px;
-  border-bottom: 3px solid var(--theme-color, #333);
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.section-title::before,
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--theme-color, #4a9eff), transparent);
+}
+.section-title::before {
+  margin-right: 20px;
+  background: linear-gradient(90deg, transparent, var(--theme-color, #4a9eff));
+}
+.section-title::after {
+  margin-left: 20px;
+  background: linear-gradient(90deg, var(--theme-color, #4a9eff), transparent);
+}
+.section-title span {
+  position: relative;
+  z-index: 1;
+  padding: 0 10px;
 }
 .project-card {
   margin-bottom: 20px;
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 .project-card:hover {
   transform: translateY(-5px);
+}
+.project-card a {
+  display: block;
+  text-decoration: none;
 }
 .project-card img {
   max-width: 100%;
@@ -47,29 +94,41 @@ date: 2026-01-27 11:10:20
     font-size: 2em;
     text-align: center;
   }
+  .project-section::before {
+    font-size: 1em;
+    top: 40px;
+  }
 }
 </style>
 
 <div class="projects-title">折腾记录</div>
 
 <div class="projects-grid">
-  <div class="project-section">
-    <div class="section-title">造物志</div>
+  <div class="project-section" data-subtitle="自己写的小玩意">
+    <div class="section-title"><span>造物志</span></div>
     <div class="project-card">
-<img src="https://github-readme-stats.eurkon.com/api/pin/?username=ZXJC-niusile&repo=huawei_carousel_backend&hide_border=true&theme=default" alt="huawei_carousel_backend"/>
+      <a href="https://github.com/ZXJC-niusile/huawei_carousel_backend" target="_blank">
+        <img src="https://github-readme-stats.eurkon.com/api/pin/?username=ZXJC-niusile&repo=huawei_carousel_backend&hide_border=true&theme=default" alt="huawei_carousel_backend"/>
+      </a>
     </div>
     <div class="project-card">
-<img src="https://github-readme-stats.eurkon.com/api/pin/?username=ZXJC-niusile&repo=JudoPro-Backend&hide_border=true&theme=default" alt="JudoPro-Backend"/>
+      <a href="https://github.com/ZXJC-niusile/JudoPro-Backend" target="_blank">
+        <img src="https://github-readme-stats.eurkon.com/api/pin/?username=ZXJC-niusile&repo=JudoPro-Backend&hide_border=true&theme=default" alt="JudoPro-Backend"/>
+      </a>
     </div>
     <div class="project-card">
-<img src="https://github-readme-stats.eurkon.com/api/pin/?username=ZXJC-niusile&repo=JudoPro-data&hide_border=true&theme=default" alt="JudoPro-data"/>
+      <a href="https://github.com/ZXJC-niusile/JudoPro-data" target="_blank">
+        <img src="https://github-readme-stats.eurkon.com/api/pin/?username=ZXJC-niusile&repo=JudoPro-data&hide_border=true&theme=default" alt="JudoPro-data"/>
+      </a>
     </div>
   </div>
 
-  <div class="project-section">
-    <div class="section-title">添砖加瓦</div>
+  <div class="project-section" data-subtitle="成为大佬们的contributor">
+    <div class="section-title"><span>添砖加瓦</span></div>
     <div class="project-card">
-<img src="https://github-readme-stats.eurkon.com/api/pin/?username=tensorlayer&repo=TensorLayerX&hide_border=true&theme=default" alt="TensorLayerX"/>
+      <a href="https://github.com/tensorlayer/TensorLayerX" target="_blank">
+        <img src="https://github-readme-stats.eurkon.com/api/pin/?username=tensorlayer&repo=TensorLayerX&hide_border=true&theme=default" alt="TensorLayerX"/>
+      </a>
     </div>
   </div>
 </div>
