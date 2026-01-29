@@ -61,6 +61,7 @@ assets:
 ## CDN User - defined plug-in
 cdn:
   css:
+    - /css/custom.css
   js:
     head:
     base:

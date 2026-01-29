@@ -4,13 +4,29 @@ date: 2026-01-27 11:10:20
 ---
 
 <style>
+/* ========== 大标题：方案5 镜像倒影效果 ========== */
 .projects-title {
   text-align: center;
   font-size: 2.8em;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   margin-top: 30px;
+  position: relative;
 }
+.projects-title::after {
+  content: "折腾记录";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  transform: scaleY(-1);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  pointer-events: none;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -19,60 +35,62 @@ date: 2026-01-27 11:10:20
 }
 .project-section {
   padding: 0;
-  position: relative;
-  overflow: hidden;
 }
-.project-section::before {
-  content: attr(data-subtitle);
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-8deg);
-  font-size: 1.2em;
-  font-weight: bold;
-  color: var(--theme-color, #333);
-  opacity: 0.08;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 0;
-  letter-spacing: 2px;
-}
+
+/* ========== 小标题：方案10 Glitch故障艺术效果（增强版） ========== */
 .section-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  text-align: center;
   font-size: 1.6em;
   font-weight: bold;
   margin-bottom: 25px;
   padding-bottom: 0;
-  border-bottom: none;
-}
-.section-title::before,
-.section-title::after {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--theme-color, #4a9eff), transparent);
-}
-.section-title::before {
-  margin-right: 20px;
-  background: linear-gradient(90deg, transparent, var(--theme-color, #4a9eff));
-}
-.section-title::after {
-  margin-left: 20px;
-  background: linear-gradient(90deg, var(--theme-color, #4a9eff), transparent);
 }
 .section-title span {
   position: relative;
-  z-index: 1;
-  padding: 0 10px;
+  display: inline-block;
+  transform: skewX(8deg);
+  color: var(--theme-color, #333);
+  text-shadow: 
+    2px 2px 0 rgba(255, 0, 64, 0.4),
+    -2px -1px 0 rgba(0, 255, 255, 0.4);
 }
+/* Glitch 红色偏移层 */
+.section-title span::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 3px;
+  color: #ff0040;
+  opacity: 0.7;
+  z-index: -1;
+  clip-path: inset(10% 0 60% 0);
+  text-shadow: none;
+}
+
+/* ========== 映射文字：方案6 打字机/代码风格 ========== */
+.section-title span::before {
+  content: attr(data-shadow);
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%) skewX(-15deg);
+  font-size: 0.75em;
+  font-weight: 500;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  color: var(--theme-color, #555);
+  opacity: 0.25;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: -2;
+  letter-spacing: 1px;
+  border-bottom: 2px solid rgba(0,0,0,0.15);
+  padding-bottom: 2px;
+}
+
 .project-card {
   margin-bottom: 20px;
   transition: transform 0.3s ease;
-  position: relative;
-  z-index: 1;
 }
 .project-card:hover {
   transform: translateY(-5px);
@@ -94,18 +112,14 @@ date: 2026-01-27 11:10:20
     font-size: 2em;
     text-align: center;
   }
-  .project-section::before {
-    font-size: 1em;
-    top: 40px;
-  }
 }
 </style>
 
 <div class="projects-title">折腾记录</div>
 
 <div class="projects-grid">
-  <div class="project-section" data-subtitle="自己写的小玩意">
-    <div class="section-title"><span>造物志</span></div>
+  <div class="project-section">
+    <div class="section-title"><span data-shadow="自己写的小玩意" data-text="造物志">造物志</span></div>
     <div class="project-card">
       <a href="https://github.com/ZXJC-niusile/huawei_carousel_backend" target="_blank">
         <img src="https://github-readme-stats.eurkon.com/api/pin/?username=ZXJC-niusile&repo=huawei_carousel_backend&hide_border=true&theme=default" alt="huawei_carousel_backend"/>
@@ -123,8 +137,8 @@ date: 2026-01-27 11:10:20
     </div>
   </div>
 
-  <div class="project-section" data-subtitle="成为大佬们的contributor">
-    <div class="section-title"><span>添砖加瓦</span></div>
+  <div class="project-section">
+    <div class="section-title"><span data-shadow="CONTRIBUTOR" data-text="添砖加瓦">添砖加瓦</span></div>
     <div class="project-card">
       <a href="https://github.com/tensorlayer/TensorLayerX" target="_blank">
         <img src="https://github-readme-stats.eurkon.com/api/pin/?username=tensorlayer&repo=TensorLayerX&hide_border=true&theme=default" alt="TensorLayerX"/>
