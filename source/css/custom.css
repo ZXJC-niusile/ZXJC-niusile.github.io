@@ -1,4 +1,109 @@
 /* ========================================
+   毛玻璃效果 (Glassmorphism) 样式
+   ======================================== */
+
+/* ========== 全局背景设置 ========== */
+/* 使用渐变背景，你也可以换成背景图片 */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    min-height: 100vh;
+}
+
+/* 如果想使用背景图片，取消下面的注释并替换图片路径 */
+/*
+body {
+    background-image: url('/images/background.jpg') !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+*/
+
+/* 暗色模式背景 */
+:root.dark body {
+    background: linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 50%, #2d2d5a 100%) !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+}
+
+/* ========== 玻璃面板通用样式 ========== */
+/* 卡片玻璃效果 */
+.trm-card,
+.trm-main-card {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 暗色模式卡片 */
+:root.dark .trm-card,
+:root.dark .trm-main-card {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 顶部导航栏玻璃效果 */
+.trm-top-bar {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+:root.dark .trm-top-bar {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 侧边栏玻璃效果 */
+.trm-sidebar {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+}
+
+:root.dark .trm-sidebar {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 内容区域透明 */
+.trm-content,
+.trm-container {
+    background-color: transparent !important;
+}
+
+/* 页脚玻璃效果 */
+.trm-footer {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+}
+
+:root.dark .trm-footer {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 文章列表项玻璃效果 */
+.trm-publication .trm-card {
+    transition: all 0.3s ease !important;
+}
+
+.trm-publication .trm-card:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+:root.dark .trm-publication .trm-card:hover {
+    background: rgba(0, 0, 0, 0.35) !important;
+}
+
+/* ========================================
    自定义响应式样式 & 侧边栏折叠
    ======================================== */
 
