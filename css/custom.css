@@ -11,6 +11,12 @@ body {
     min-height: 100vh;
 }
 
+/* Ensure content stays above the particle canvas */
+.trm-app-frame {
+    position: relative;
+    z-index: 200;
+}
+
 /* 如果想使用背景图片，取消下面的注释并替换图片路径 */
 /*
 body {
@@ -299,4 +305,28 @@ body {
 .trm-publication h2:first-of-type {
     margin-top: 15px;
     padding-top: 10px;
+}
+
+/* ========== 抗重力特效优化 (无白屏) ========== */
+/* 隐藏进度条/加载遮罩 */
+.trm-preloader {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* 强制内容不消失 (覆盖JS动画) */
+html.is-animating .trm-scroll-container {
+    opacity: 1 !important;
+}
+
+.trm-scroll-container {
+    transition: opacity 0.1s !important;
+    /* 极速切换 */
+}
+
+/* 隐藏过度动画遮罩 */
+.trm-mode-swich-animation,
+.trm-mode-swich-animation-frame {
+    display: none !important;
 }
