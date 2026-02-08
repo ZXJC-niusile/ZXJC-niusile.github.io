@@ -14,30 +14,23 @@ layout: false
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SimonAKing/font/font.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Force solid black background for Matrix section */
         .content-main {
-            background: #000 !important;
-            position: fixed !important;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-        }
-
-        #matrixCanvas {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            z-index: 1 !important;
-            display: block !important;
             background: #000 !important;
         }
 
         .content-main #card {
             position: relative;
             z-index: 10;
+        }
+
+        #matrixBg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 1;
         }
     </style>
 </head>
@@ -67,11 +60,10 @@ layout: false
             </div>
         </div>
 
-        <!-- Main Screen with Matrix Background -->
+        <!-- Main Screen with Rezmason Matrix Background -->
         <div class="content content-main" style="background:#000 !important;">
-            <!-- Matrix Canvas -->
-            <canvas id="matrixCanvas"
-                style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;background:#000;"></canvas>
+            <!-- Rezmason Matrix Effect via iframe -->
+            <iframe id="matrixBg" src="/matrix/?skipIntro=true"></iframe>
 
             <div id="card">
                 <div class="card-inner fade">
@@ -82,7 +74,8 @@ layout: false
                         <h2 id="signature">I've got a long way to go</h2>
                     </header>
                     <ul>
-                        <li><a href="/" aria-label="Blog"><i class="icon icon-bokeyuan"></i><span>博客</span></a></li>
+                        <li><a href="/archives/" aria-label="Blog"><i class="icon icon-bokeyuan"></i><span>博客</span></a>
+                        </li>
                         <li><a href="/about/" aria-label="About"><i class="icon icon-xiaolian"></i><span>关于</span></a>
                         </li>
                         <li><a href="/archives/" aria-label="Archives"><i
@@ -127,99 +120,10 @@ layout: false
                 SUNRAYS_RESOLUTION: 196,
                 SUNRAYS_WEIGHT: 1.0,
             };
-            window.blogUrl = '/';
+            window.blogUrl = '/archives/';
         </script>
         <script src="js/main.js"></script>
         <script src="js/background.js"></script>
-
-        <!-- Matrix Rain Effect - Inline to ensure it runs -->
-        <script>
-            (function () {
-                'use strict';
-
-                const canvas = document.getElementById('matrixCanvas');
-                if (!canvas) {
-                    console.error('Matrix canvas not found!');
-                    return;
-                }
-
-                const ctx = canvas.getContext('2d');
-
-                // Matrix characters
-                const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*';
-                const charArray = chars.split('');
-
-                let fontSize = 16;
-                let columns;
-                let drops = [];
-
-                function resize() {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                    columns = Math.floor(canvas.width / fontSize);
-
-                    drops = [];
-                    for (let i = 0; i < columns; i++) {
-                        drops[i] = Math.random() * -100;
-                    }
-                }
-
-                function draw() {
-                    // Fade effect
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                    ctx.font = fontSize + 'px monospace';
-
-                    for (let i = 0; i < drops.length; i++) {
-                        const char = charArray[Math.floor(Math.random() * charArray.length)];
-                        const x = i * fontSize;
-                        const y = drops[i] * fontSize;
-
-                        // Bright head
-                        ctx.fillStyle = '#fff';
-                        ctx.fillText(char, x, y);
-
-                        // Green trail
-                        for (let j = 1; j < 20; j++) {
-                            const trailY = y - j * fontSize;
-                            if (trailY > 0) {
-                                const alpha = 1 - (j / 20);
-                                const green = Math.floor(255 * alpha);
-                                ctx.fillStyle = `rgb(0, ${green}, 0)`;
-                                const trailChar = charArray[Math.floor(Math.random() * charArray.length)];
-                                ctx.fillText(trailChar, x, trailY);
-                            }
-                        }
-
-                        if (y > canvas.height && Math.random() > 0.975) {
-                            drops[i] = 0;
-                        }
-
-                        drops[i] += 0.5 + Math.random() * 0.5;
-                    }
-                }
-
-                // Initialize
-                resize();
-                window.addEventListener('resize', resize);
-
-                // Initial black fill
-                ctx.fillStyle = '#000';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                // Animation
-                function animate() {
-                    draw();
-                    requestAnimationFrame(animate);
-                }
-
-                // Start animation after a short delay
-                setTimeout(animate, 100);
-
-                console.log('Matrix rain initialized!');
-            })();
-        </script>
     </main>
 </body>
 
