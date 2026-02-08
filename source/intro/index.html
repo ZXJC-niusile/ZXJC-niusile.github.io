@@ -1,0 +1,226 @@
+---
+layout: false
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>无径之巅 冰湖回响</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
+    <meta name="theme-color" content="#000">
+    <meta name="description" content="在代码的雪山中凿刻路径，在算法的冰湖里投下石子">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SimonAKing/font/font.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Force solid black background for Matrix section */
+        .content-main {
+            background: #000 !important;
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #matrixCanvas {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 1 !important;
+            display: block !important;
+            background: #000 !important;
+        }
+
+        .content-main #card {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- Intro Screen with Fluid Background -->
+        <div class="content content-intro">
+            <div class="content-inner">
+                <canvas id="background"></canvas>
+                <div class="wrap fade">
+                    <h2 class="content-title">无径之巅，冰湖回响</h2>
+                    <h3 class="content-subtitle" original-content="在无人之境，找寻思维褶皱，在寂静冰湖，投石问路">&nbsp;</h3>
+                    <a class="enter">PRESS START</a>
+                    <div class="arrow arrow-1"></div>
+                    <div class="arrow arrow-2"></div>
+                </div>
+            </div>
+            <div class="shape-wrap">
+                <svg class="shape" width="100%" height="100vh" preserveAspectRatio="none" viewBox="0 0 1440 800"
+                    xmlns:pathdata="http://www.codrops.com/">
+                    <path
+                        d="M -44,-50 C -52.71,28.52 15.86,8.186 184,14.69 383.3,22.39 462.5,12.58 638,14 835.5,15.6 987,6.4 1194,13.86 1661,30.68 1652,-36.74 1582,-140.1 1512,-243.5 15.88,-589.5 -44,-50 Z"
+                        pathdata:id="M -44,-50 C -137.1,117.4 67.86,445.5 236,452 435.3,459.7 500.5,242.6 676,244 873.5,245.6 957,522.4 1154,594 1593,753.7 1793,226.3 1582,-126 1371,-478.3 219.8,-524.2 -44,-50 Z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Main Screen with Matrix Background -->
+        <div class="content content-main" style="background:#000 !important;">
+            <!-- Matrix Canvas -->
+            <canvas id="matrixCanvas"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;background:#000;"></canvas>
+
+            <div id="card">
+                <div class="card-inner fade">
+                    <header>
+                        <img src="assets/avatar.jpg" width="100" height="100" alt="avatar"
+                            onerror="this.style.display='none'">
+                        <h1>松鹤猫院</h1>
+                        <h2 id="signature">I've got a long way to go</h2>
+                    </header>
+                    <ul>
+                        <li><a href="/" aria-label="Blog"><i class="icon icon-bokeyuan"></i><span>博客</span></a></li>
+                        <li><a href="/about/" aria-label="About"><i class="icon icon-xiaolian"></i><span>关于</span></a>
+                        </li>
+                        <li><a href="/archives/" aria-label="Archives"><i
+                                    class="icon icon-wenjianjia"></i><span>归档</span></a></li>
+                        <li><a href="/projects/" aria-label="Projects"><i
+                                    class="icon icon-github"></i><span>项目</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+        <script>
+            window.$ = selector => document.querySelector(selector);
+            const getOriginalContent = selector => $(selector).getAttribute("original-content");
+            window.subtitle = getOriginalContent(".content-subtitle");
+            window.signature = "I've got a long way to go";
+            window.config = {
+                SIM_RESOLUTION: 128,
+                DYE_RESOLUTION: 1024,
+                CAPTURE_RESOLUTION: 512,
+                DENSITY_DISSIPATION: 1,
+                VELOCITY_DISSIPATION: 0.2,
+                PRESSURE: 0.8,
+                PRESSURE_ITERATIONS: 20,
+                CURL: 30,
+                SPLAT_RADIUS: 0.25,
+                SPLAT_FORCE: 6000,
+                SHADING: true,
+                COLORFUL: true,
+                COLOR_UPDATE_SPEED: 10,
+                PAUSED: false,
+                BACK_COLOR: { r: 30, g: 31, b: 33 },
+                TRANSPARENT: false,
+                BLOOM: true,
+                BLOOM_ITERATIONS: 8,
+                BLOOM_RESOLUTION: 256,
+                BLOOM_INTENSITY: 0.4,
+                BLOOM_THRESHOLD: 0.8,
+                BLOOM_SOFT_KNEE: 0.7,
+                SUNRAYS: true,
+                SUNRAYS_RESOLUTION: 196,
+                SUNRAYS_WEIGHT: 1.0,
+            };
+            window.blogUrl = '/';
+        </script>
+        <script src="js/main.js"></script>
+        <script src="js/background.js"></script>
+
+        <!-- Matrix Rain Effect - Inline to ensure it runs -->
+        <script>
+            (function () {
+                'use strict';
+
+                const canvas = document.getElementById('matrixCanvas');
+                if (!canvas) {
+                    console.error('Matrix canvas not found!');
+                    return;
+                }
+
+                const ctx = canvas.getContext('2d');
+
+                // Matrix characters
+                const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*';
+                const charArray = chars.split('');
+
+                let fontSize = 16;
+                let columns;
+                let drops = [];
+
+                function resize() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    columns = Math.floor(canvas.width / fontSize);
+
+                    drops = [];
+                    for (let i = 0; i < columns; i++) {
+                        drops[i] = Math.random() * -100;
+                    }
+                }
+
+                function draw() {
+                    // Fade effect
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.font = fontSize + 'px monospace';
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const char = charArray[Math.floor(Math.random() * charArray.length)];
+                        const x = i * fontSize;
+                        const y = drops[i] * fontSize;
+
+                        // Bright head
+                        ctx.fillStyle = '#fff';
+                        ctx.fillText(char, x, y);
+
+                        // Green trail
+                        for (let j = 1; j < 20; j++) {
+                            const trailY = y - j * fontSize;
+                            if (trailY > 0) {
+                                const alpha = 1 - (j / 20);
+                                const green = Math.floor(255 * alpha);
+                                ctx.fillStyle = `rgb(0, ${green}, 0)`;
+                                const trailChar = charArray[Math.floor(Math.random() * charArray.length)];
+                                ctx.fillText(trailChar, x, trailY);
+                            }
+                        }
+
+                        if (y > canvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+
+                        drops[i] += 0.5 + Math.random() * 0.5;
+                    }
+                }
+
+                // Initialize
+                resize();
+                window.addEventListener('resize', resize);
+
+                // Initial black fill
+                ctx.fillStyle = '#000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Animation
+                function animate() {
+                    draw();
+                    requestAnimationFrame(animate);
+                }
+
+                // Start animation after a short delay
+                setTimeout(animate, 100);
+
+                console.log('Matrix rain initialized!');
+            })();
+        </script>
+    </main>
+</body>
+
+</html>
