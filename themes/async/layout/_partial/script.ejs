@@ -1,14 +1,15 @@
 <!-- Plugin -->
 <%- partial('../_third-party/plugin',{ loadtype: 'js' }) %>
 
-<% if(hexo_env('cmd') !== 'server'){ %>
-    <!-- Service Worker -->
-    <%- partial('../_third-party/sw') %>
-    <!-- baidu push -->
-    <%- partial('../_third-party/seo/baidu-push') %>
-<% } %>
+    <% if(hexo_env('cmd') !=='server' ){ %>
+        <!-- Service Worker -->
+        <%- partial('../_third-party/sw') %>
+            <!-- baidu push -->
+            <%- partial('../_third-party/seo/baidu-push') %>
+                <% } %>
 
-<script id="async-script" src="<%= url_for(theme.assets.plugin.hexo_theme_async.main) %>?v=<%= theme.version %>"></script>
+                    <script id="async-script"
+                        src="<%= url_for(theme.assets.plugin.hexo_theme_async.main) %>?v=<%= theme.version %>"></script>
 
-<!-- CDN -->
-<%- partial('../_third-party/cdn',{ cdntype: 'body' }) %>
+                    <!-- CDN -->
+                    <%- partial('../_third-party/cdn',{ cdntype: 'body' }) %>
