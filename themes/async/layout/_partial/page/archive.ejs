@@ -2,37 +2,245 @@
     <div class="col-lg-12">
         <div class="trm-card">
             <div style="padding: 0 20px;">
-                <% if(is_archive()){%>
-                    <%- list_archives({
-                        type: "yearly",
-                        ulclass: "trm-tag",
-                        liclass: "trm-tag"
-                    }) %>
-                <% } else if (is_category()){ %>
-                    <%- list_categories({
-                        ulclass: "trm-tag",
-                        liclass: "trm-tag"
-                    }) %>
-                <% } else if (is_tag()) { %>
-                    <%- list_tags({ class: {
-                        ul: "trm-tag-list",
-                        li:"trm-tag-list-item"
-                    } }) %>
+
+                <!-- 年份筛选器 + 分类树 -->
+                <% if (is_archive()) { %>
+                    <div class="trm-archive-filters">
+                        <!-- 年份选择 -->
+                        <div class="trm-filter-section">
+                            <h6 class="trm-filter-title">
+                                <i class="fas fa-calendar-alt"></i>
+                                <%= __('title.year_archives') %>
+                            </h6>
+                            <div id="year-filter" class="trm-filter-tags">
+                                <a href="<%- url_for('/archives/') %>" class="trm-tag <%= !page.year ? 'active' : '' %>">全部</a>
+                                <%
+                                var years = [];
+                                site.posts.sort('date', -1).forEach(function(post) {
+                                    var year = post.date.year();
+                                    if (years.indexOf(year) === -1) {
+                                        years.push(year);
+                                    }
+                                });
+                                years.forEach(function(year) { %>
+                                    <a href="<%- url_for('/archives/' + year + '/') %>" class="trm-tag <%= page.year == year ? 'active' : '' %>"><%= year %></a>
+                                <% }); %>
+                            </div>
+                        </div>
+
+                        <!-- 分类树 -->
+                        <div class="trm-filter-section">
+                            <h6 class="trm-filter-title">
+                                <i class="fas fa-folder"></i>
+                                <%= __('title.categories') %>
+                            </h6>
+                            <div id="category-tree" class="trm-category-tree">
+                                <%
+                                var categories = site.categories.filter(function(cat) {
+                                    return cat.parent === undefined;
+                                });
+
+                                function renderCategory(cat, level) {
+                                    var hasChildren = cat.children && cat.children.length > 0;
+                                    var activeClass = page.category === cat.name ? 'active' : '';
+                                    var indent = level * 16;
+                                %>
+                                    <div class="trm-category-item" style="padding-left: <%= indent %>px;">
+                                        <% if (hasChildren) { %>
+                                            <i class="fas fa-chevron-right tree-toggle" data-category="<%= cat.name %>"></i>
+                                        <% } else { %>
+                                            <span class="tree-indent"></span>
+                                        <% } %>
+                                        <a href="<%- url_for(cat.path) %>" class="trm-tag <%= activeClass %>">
+                                            <%= cat.name %>
+                                            <span class="post-count"><%= cat.posts.length %></span>
+                                        </a>
+                                        <% if (hasChildren) { %>
+                                            <div class="trm-category-children" data-parent="<%= cat.name %>">
+                                                <% cat.children.forEach(function(child) {
+                                                    renderCategory(child, level + 1);
+                                                }); %>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                <% }
+
+                                categories.forEach(function(cat) {
+                                    renderCategory(cat, 0);
+                                });
+                                %>
+                            </div>
+                        </div>
+                    </div>
                 <% } %>
+
             </div>
         </div>
     </div>
 </div>
 
+<!-- 样式和脚本 -->
+<style>
+.trm-archive-filters {
+    padding: 20px 0;
+}
+
+.trm-filter-section {
+    margin-bottom: 30px;
+}
+
+.trm-filter-section:last-child {
+    margin-bottom: 0;
+}
+
+.trm-filter-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--theme-color, #00283a);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trm-filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.trm-filter-tags .trm-tag {
+    padding: 6px 16px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--primary-30, rgba(175, 180, 43, 0.3));
+    border-radius: 20px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.trm-filter-tags .trm-tag:hover,
+.trm-filter-tags .trm-tag.active {
+    background: var(--primary-30, rgba(175, 180, 43, 0.3));
+    border-color: var(--primary-30, rgba(175, 180, 43, 0.5));
+    color: var(--theme-color);
+}
+
+.trm-category-tree {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.trm-category-item {
+    position: relative;
+    margin: 5px 0;
+}
+
+.trm-category-item > a {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.trm-category-item > a:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.trm-category-item > a.active {
+    color: var(--theme-color);
+    font-weight: 600;
+}
+
+.trm-category-item .post-count {
+    margin-left: 8px;
+    font-size: 0.8em;
+    opacity: 0.6;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.trm-category-item .tree-toggle {
+    cursor: pointer;
+    font-size: 0.7em;
+    margin-right: 6px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+}
+
+.trm-category-item .tree-toggle.expanded {
+    transform: rotate(90deg);
+}
+
+.trm-category-children {
+    display: none;
+}
+
+.trm-category-children.show {
+    display: block;
+}
+
+:root.dark .trm-filter-tags .trm-tag {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+:root.dark .trm-filter-tags .trm-tag:hover,
+:root.dark .trm-filter-tags .trm-tag.active {
+    background: rgba(255, 255, 255, 0.1);
+}
+</style>
+
+<script>
+(function() {
+    // 分类树展开/折叠
+    const toggles = document.querySelectorAll('.tree-toggle');
+    toggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const categoryName = this.dataset.category;
+            const children = document.querySelector('.trm-category-children[data-parent="' + categoryName + '"]');
+
+            if (children) {
+                children.classList.toggle('show');
+                this.classList.toggle('expanded');
+            }
+        });
+    });
+
+    // 如果当前在子分类页面，自动展开父分类
+    <% if (is_category() && page.category) { %>
+        const currentCategory = '<%= page.category %>';
+        // 查找并展开父分类
+        const allChildren = document.querySelectorAll('.trm-category-children');
+        allChildren.forEach(function(childrenEl) {
+            const childLinks = childrenEl.querySelectorAll('a');
+            for (let i = 0; i < childLinks.length; i++) {
+                if (childLinks[i].getAttribute('href').includes('<%= page.category %>')) {
+                    childrenEl.classList.add('show');
+                    const toggle = document.querySelector('.tree-toggle[data-category="' + childrenEl.dataset.parent + '"]');
+                    if (toggle) toggle.classList.add('expanded');
+                    break;
+                }
+            }
+        });
+    <% } %>
+})();
+</script>
+
 <!-- history -->
-<% if(page.posts) { %>
+<% if (page.posts) { %>
 <div class="row">
     <div class="col-lg-12">
         <!-- title -->
         <h5 class="trm-title-with-divider">
-            <% if(page.archive){ %>
-                <%- page.year ? __('title.year_archives',page.year) : __('title.all_archives') %>
-            <% } else if (is_category()){ %>
+            <% if (page.archive) { %>
+                <%- page.year ? __('title.year_archives', page.year) : __('title.all_archives') %>
+            <% } else if (is_category()) { %>
                 <%- page.category %>
             <% } else if (is_tag()) { %>
                 <%- page.tag %>
@@ -48,7 +256,7 @@
                 <div class="trm-timeline-mark-light"></div>
                 <div class="trm-timeline-mark"></div>
                 <div class="trm-timeline-content <%- theme.archive.type %>">
-                    <% if(theme.archive.type === 'less'){ %>
+                    <% if (theme.archive.type === 'less') { %>
                         <div class="trm-card-header">
                             <h6>
                                 <a href="<%- url_for(element.path) %>" class="trm-anima-link">
@@ -56,7 +264,7 @@
                                 </a>
                             </h6>
                         </div>
-                    <% } else {%>
+                    <% } else { %>
                         <div class="trm-card-header">
                             <div class="trm-left-side">
                                 <h6>
@@ -64,22 +272,22 @@
                                         <%= element.title %>
                                     </a>
                                 </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
-                                        <li class="trm-accent-color"><%= date(element[theme.datetime_foramt.archive.type],theme.datetime_foramt.archive.date) %></li>
-                                        <li class="trm-accent-color"><%= date(element[theme.datetime_foramt.archive.type],theme.datetime_foramt.archive.time) %></li>
-                                        <% if(theme.wordcount.enable && theme.wordcount.count){ %>
+                                <div class="trm-text-sm trm-accent-color trm-mb-15">
+                                    <ul class="trm-card-data trm-label">
+                                        <li class="trm-accent-color"><%= date(element[theme.datetime_format.archive.type], theme.datetime_format.archive.date) %></li>
+                                        <li class="trm-accent-color"><%= date(element[theme.datetime_format.archive.type], theme.datetime_format.archive.time) %></li>
+                                        <% if (theme.wordcount.enable && theme.wordcount.count) { %>
                                         <li><%= wordcount(element.content) %></li>
                                         <% } %>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <%if(element.excerpt){%>
-                            <div class="trm-publication trm-mt-15">
+                        <% if (element.excerpt) { %>
+                            <div class="trm-publication trm-mb-15">
                                 <%- element.excerpt %>
                             </div>
-                        <%}%>
+                        <% } %>
                     <% } %>
                 </div>
             </div>
@@ -92,5 +300,3 @@
 <!-- history end -->
 
 <%- partial(theme.layout.paginator) %>
-
-
