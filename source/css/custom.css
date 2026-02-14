@@ -36,19 +36,27 @@ body {
 /* ========== 玻璃面板通用样式 ========== */
 /* 卡片玻璃效果 */
 .trm-card,
-.trm-main-card {
-    background: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+.trm-main-card,
+.trm-blog-card,
+.trm-about-card,
+.trm-links-card,
+.trm-footer-card {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* 暗色模式卡片 */
 :root.dark .trm-card,
-:root.dark .trm-main-card {
-    background: rgba(0, 0, 0, 0.25) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+:root.dark .trm-main-card,
+:root.dark .trm-blog-card,
+:root.dark .trm-about-card,
+:root.dark .trm-links-card,
+:root.dark .trm-footer-card {
+    background: rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
