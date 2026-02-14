@@ -57,7 +57,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"zxjc-niusile.github.io","author":"扎西尖措","root":"/","typed_text":["I've got a long way to go"],"theme_version":"2.2.6","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/failure.ico","show_text":"","hide_text":"通衢平野，尘嚣无痕"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"01/26/2026 00:00:00","prefix":"本站已萌萌哒运行"},"danmu":{"enable":false,"el":".trm-banner"},"search":{"enable":true,"type":"local","href":"https://www.google.com/search?q=site:","domain":"https://ZXJC-niusile.github.io","path":"search.xml"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2026-02-09 15:17:00"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2026-02-14 21:50:25"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.6" id="trm-switch-style">
@@ -158,8 +158,15 @@
             </li>
             
             <li class="menu-item-has-children ">
-                <a  href="/links/" target="">
-                    LINKS
+                <a  href="/blog/" target="">
+                    BLOG
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/thinking/" target="">
+                    THINKING
                 </a>
                 
             </li>
@@ -388,13 +395,181 @@ if (window.innerWidth <= 767) {
     <div class="col-lg-12">
         <div class="trm-card">
             <div style="padding: 0 20px;">
+
+                <!-- 年份筛选器 + 分类树 -->
                 
-                    <ul class="trm-tag-list"><li class="trm-tag-list-item"><a class="archive-list-link" href="/archives/2026/">2026</a><span class="archive-list-count">（1）</span></li><li class="trm-tag-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">（1）</span></li></ul>
+                    <div class="trm-archive-filters">
+                        <!-- 年份选择 -->
+                        <div class="trm-filter-section">
+                            <h6 class="trm-filter-title">
+                                <i class="fas fa-calendar-alt"></i>
+                                undefined 年的归档
+                            </h6>
+                            <div id="year-filter" class="trm-filter-tags">
+                                <a href="/archives/" class="trm-tag active">全部</a>
+                                
+                                    <a href="/archives/2026/" class="trm-tag ">2026</a>
+                                
+                                    <a href="/archives/2025/" class="trm-tag ">2025</a>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 分类树 -->
+                        <div class="trm-filter-section">
+                            <h6 class="trm-filter-title">
+                                <i class="fas fa-folder"></i>
+                                title.categories
+                            </h6>
+                            <div id="category-tree" class="trm-category-tree">
+                                
+                            </div>
+                        </div>
+                    </div>
                 
+
             </div>
         </div>
     </div>
 </div>
+
+<!-- 样式和脚本 -->
+<style>
+.trm-archive-filters {
+    padding: 20px 0;
+}
+
+.trm-filter-section {
+    margin-bottom: 30px;
+}
+
+.trm-filter-section:last-child {
+    margin-bottom: 0;
+}
+
+.trm-filter-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--theme-color, #00283a);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trm-filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.trm-filter-tags .trm-tag {
+    padding: 6px 16px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--primary-30, rgba(175, 180, 43, 0.3));
+    border-radius: 20px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.trm-filter-tags .trm-tag:hover,
+.trm-filter-tags .trm-tag.active {
+    background: var(--primary-30, rgba(175, 180, 43, 0.3));
+    border-color: var(--primary-30, rgba(175, 180, 43, 0.5));
+    color: var(--theme-color);
+}
+
+.trm-category-tree {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.trm-category-item {
+    position: relative;
+    margin: 5px 0;
+}
+
+.trm-category-item > a {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.trm-category-item > a:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.trm-category-item > a.active {
+    color: var(--theme-color);
+    font-weight: 600;
+}
+
+.trm-category-item .post-count {
+    margin-left: 8px;
+    font-size: 0.8em;
+    opacity: 0.6;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.trm-category-item .tree-toggle {
+    cursor: pointer;
+    font-size: 0.7em;
+    margin-right: 6px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+}
+
+.trm-category-item .tree-toggle.expanded {
+    transform: rotate(90deg);
+}
+
+.trm-category-children {
+    display: none;
+}
+
+.trm-category-children.show {
+    display: block;
+}
+
+:root.dark .trm-filter-tags .trm-tag {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+:root.dark .trm-filter-tags .trm-tag:hover,
+:root.dark .trm-filter-tags .trm-tag.active {
+    background: rgba(255, 255, 255, 0.1);
+}
+</style>
+
+<script>
+(function() {
+    // 分类树展开/折叠
+    const toggles = document.querySelectorAll('.tree-toggle');
+    toggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const categoryName = this.dataset.category;
+            const children = document.querySelector('.trm-category-children[data-parent="' + categoryName + '"]');
+
+            if (children) {
+                children.classList.toggle('show');
+                this.classList.toggle('expanded');
+            }
+        });
+    });
+
+    // 如果当前在子分类页面，自动展开父分类
+    
+})();
+</script>
 
 <!-- history -->
 
@@ -424,8 +599,8 @@ if (window.innerWidth <= 767) {
                                         Hexo 博客搭建指南
                                     </a>
                                 </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
+                                <div class="trm-text-sm trm-accent-color trm-mb-15">
+                                    <ul class="trm-card-data trm-label">
                                         <li class="trm-accent-color">01/26</li>
                                         <li class="trm-accent-color">20:54</li>
                                         
@@ -452,8 +627,8 @@ if (window.innerWidth <= 767) {
                                         我的第一篇博客文章
                                     </a>
                                 </h6>
-                                <div class="trm-text-sm trm-accent-color trm-mt-15">
-                                    <ul class="trm-card-data trm-label ">
+                                <div class="trm-text-sm trm-accent-color trm-mb-15">
+                                    <ul class="trm-card-data trm-label">
                                         <li class="trm-accent-color">06/25</li>
                                         <li class="trm-accent-color">13:58</li>
                                         
@@ -479,8 +654,6 @@ if (window.innerWidth <= 767) {
     <div class="trm-pagination">
         <span class="page-number current">1</span>
     </div>
-
-
 
 
 
