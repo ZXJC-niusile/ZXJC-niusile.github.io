@@ -7,6 +7,11 @@
 
 <body>
 
+  <!-- 粒子效果容器 (仅在非首页) -->
+  <% if (!page.is_home) { %>
+  <div id="particles-container"></div>
+  <% } %>
+
   <!-- app wrapper -->
   <div class="trm-app-frame">
 

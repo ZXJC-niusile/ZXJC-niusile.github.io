@@ -82,12 +82,23 @@
 
 
 
+<!-- 粒子效果 CSS (仅在非首页) -->
+
+<link rel="stylesheet" href="/css/particles.css?v=2.2.6&pv=20260215b">
+
+
 <!-- Site Analytics -->
 
  
+
 <meta name="generator" content="Hexo 7.3.0"></head>
 
 <body>
+
+  <!-- 粒子效果容器 (仅在非首页) -->
+  
+  <div id="particles-container"></div>
+  
 
   <!-- app wrapper -->
   <div class="trm-app-frame">
@@ -691,6 +702,11 @@ if (window.innerWidth <= 767) {
                     <script id="async-script"
                         src="/js/main.js?v=2.2.6"></script>
 
+                    <!-- 粒子效果脚本 (仅在非首页) -->
+                    
+                    <script type="module" src="/js/particles/particles-effect.js?v=2.2.6&pv=20260215b"></script>
+                    
+
                     <!-- CDN -->
                     
 
@@ -699,6 +715,7 @@ if (window.innerWidth <= 767) {
     
 
     
+
 
 
 

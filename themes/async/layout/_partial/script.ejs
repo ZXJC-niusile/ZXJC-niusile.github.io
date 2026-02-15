@@ -11,5 +11,10 @@
                     <script id="async-script"
                         src="<%= url_for(theme.assets.plugin.hexo_theme_async.main) %>?v=<%= theme.version %>"></script>
 
+                    <!-- 粒子效果脚本 (仅在非首页) -->
+                    <% if (!page.is_home) { %>
+                    <script type="module" src="<%= url_for('js/particles/particles-effect.js') %>?v=<%= theme.version %>&pv=20260215b"></script>
+                    <% } %>
+
                     <!-- CDN -->
                     <%- partial('../_third-party/cdn',{ cdntype: 'body' }) %>

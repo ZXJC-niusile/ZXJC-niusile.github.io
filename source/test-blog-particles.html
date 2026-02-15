@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particles Blog Test</title>
+    <link rel="stylesheet" href="/css/particles.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+            }
+        }
+    }
+    </script>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        #test-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+        }
+        #content {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        h1 { color: #333; margin-bottom: 20px; }
+        p { color: #666; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div id="particles-container"></div>
+
+    <div id="test-container">
+        <div id="content">
+            <h1>粒子效果测试页面</h1>
+            <p>此页面模拟博客环境，测试粒子效果是否正常工作。</p>
+            <p>如果你能看到粒子效果（背景有点点），说明集成成功！</p>
+            <p>鼠标移动时粒子应该会跟随你的鼠标。</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { YA } from '/js/particles/YA.js';
+
+        console.log('[Test] 开始初始化粒子效果');
+
+        const wrapper = new YA({
+            container: document.getElementById('particles-container'),
+            theme: 'light',
+            particlesScale: 0.75,
+            density: 200,
+            interactive: true,
+            gui: false,
+            verbose: true,
+            ringWidth: 0.15,
+            ringWidth2: 0.05,
+            ringDisplacement: 0.15,
+        });
+
+        console.log('[Test] 粒子系统创建成功:', wrapper);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (wrapper) {
+                wrapper.render();
+            }
+        }
+        }
+
+        animate();
+
+        window.particlesWrapper = wrapper;
+        console.log('[Test] 粒子效果已加载');
+    </script>
+</body>
+</html>
