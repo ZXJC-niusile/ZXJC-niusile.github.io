@@ -70,5 +70,10 @@
 <!-- CDN -->
 <%- partial('../_third-party/cdn',{ cdntype: 'head' }) %>
 
+<!-- 粒子效果 CSS (仅在非首页) -->
+<% if (!page.is_home) { %>
+<link rel="stylesheet" href="<%= url_for('css/particles.css') %>?v=<%= theme.version %>&pv=20260215b">
+<% } %>
+
 <!-- Site Analytics -->
 <%- partial(theme.layout.analytics) %>
