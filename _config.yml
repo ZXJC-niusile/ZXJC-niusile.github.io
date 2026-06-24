@@ -5,7 +5,7 @@
 # Site
 title: 无径之巅 冰湖回响
 subtitle: '在无人处找路的思维褶皱'
-description: '在代码的雪山中凿刻路径，在算法的冰湖里投下石子。一个初学者的学习笔记与日常�?'
+description: '在代码的雪山中凿刻路径，在算法的冰湖里投下石子。一个初学者的学习笔记与日常记录'
 keywords:
 author: 扎西尖措
 language: zh-Hans
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://ZXJC-niusile.github.io 
+url: https://zxjc-niusile.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
