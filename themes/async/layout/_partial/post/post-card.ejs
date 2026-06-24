@@ -22,7 +22,7 @@
         <% } %>
         <div class="trm-card-descr">
             <div class="trm-label trm-category trm-mb-20">
-                <a href=" <%- post.categories && post.categories.length ? url_for(post.categories.data[0].path) :'#.' %>">
+                <a href="<%- post.categories && post.categories.length ? url_for(post.categories.data[0].path) : 'javascript:void(0)' %>">
                     <%- post.categories && post.categories.length ? post.categories.data[0].name :__('title.unclassified')  %>
                 </a>
             </div>
