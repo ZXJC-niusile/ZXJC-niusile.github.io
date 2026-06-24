@@ -6,15 +6,7 @@ const fonts = {
 	},
 };
 
-const textureURLs = {
-	sand: "assets/sand.png",
-	pixels: "assets/pixel_grid.png",
-	mesh: "assets/mesh.png",
-	metal: "assets/metal.png",
-};
-
 const hsl = (...values) => ({ space: "hsl", values });
-const rgb = (...values) => ({ space: "rgb", values });
 
 const defaults = {
 	font: "matrixcode",
@@ -391,7 +383,6 @@ const paramMapping = {
 	version: { key: "version", parser: (s) => s },
 	font: { key: "font", parser: (s) => s },
 	effect: { key: "effect", parser: (s) => s },
-	camera: { key: "useCamera", parser: isTrue },
 	numColumns: { key: "numColumns", parser: (s) => nullNaN(parseInt(s)) },
 	density: { key: "density", parser: (s) => nullNaN(range(parseFloat(s), 0)) },
 	resolution: { key: "resolution", parser: (s) => nullNaN(parseFloat(s)) },
@@ -504,20 +495,11 @@ export default (urlParams) => {
 	const fontName = [validParams.font, version.font, defaults.font].find((name) => name in fonts);
 	const font = fonts[fontName];
 
-	const baseTextureURL = textureURLs[[version.baseTexture, defaults.baseTexture].find((name) => name in textureURLs)];
-	const hasBaseTexture = baseTextureURL != null;
-	const glintTextureURL = textureURLs[[version.glintTexture, defaults.glintTexture].find((name) => name in textureURLs)];
-	const hasGlintTexture = glintTextureURL != null;
-
 	const config = {
 		...defaults,
 		...version,
 		...font,
 		...validParams,
-		baseTextureURL,
-		glintTextureURL,
-		hasBaseTexture,
-		hasGlintTexture,
 	};
 
 	if (config.bloomSize <= 0) {
