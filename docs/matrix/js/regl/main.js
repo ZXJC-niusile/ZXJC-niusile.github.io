@@ -4,11 +4,6 @@ import makeRain from "./rainPass.js";
 import makeBloomPass from "./bloomPass.js";
 import makePalettePass from "./palettePass.js";
 import makeStripePass from "./stripePass.js";
-import makeImagePass from "./imagePass.js";
-import makeQuiltPass from "./quiltPass.js";
-import makeMirrorPass from "./mirrorPass.js";
-import { setupCamera, cameraCanvas, cameraAspectRatio } from "../camera.js";
-import getLKG from "./lkgHelper.js";
 
 const effects = {
 	none: null,
@@ -19,8 +14,6 @@ const effects = {
 	pride: makeStripePass,
 	transPride: makeStripePass,
 	trans: makeStripePass,
-	image: makeImagePass,
-	mirror: makeMirrorPass,
 };
 
 const dimensions = { width: 1, height: 1 };
@@ -58,10 +51,6 @@ export default async (canvas, config) => {
 	}
 	resize();
 
-	if (config.useCamera) {
-		await setupCamera();
-	}
-
 	const extensions = ["OES_texture_half_float", "OES_texture_half_float_linear"];
 	// These extensions are also needed, but Safari misreports that they are missing
 	const optionalExtensions = ["EXT_color_buffer_half_float", "WEBGL_color_buffer_float", "OES_standard_derivatives"];
@@ -78,14 +67,11 @@ export default async (canvas, config) => {
 
 	const regl = createREGL({ canvas, pixelRatio: 1, extensions, optionalExtensions });
 
-	const cameraTex = regl.texture(cameraCanvas);
-	const lkg = await getLKG(config.useHoloplay, true);
-
 	// All this takes place in a full screen quad.
 	const fullScreenQuad = makeFullScreenQuad(regl);
 	const effectName = config.effect in effects ? config.effect : "palette";
-	const context = { regl, config, lkg, cameraTex, cameraAspectRatio };
-	const pipeline = makePipeline(context, [makeRain, makeBloomPass, effects[effectName], makeQuiltPass]);
+	const context = { regl, config };
+	const pipeline = makePipeline(context, [makeRain, makeBloomPass, effects[effectName]]);
 	const screenUniforms = { tex: pipeline[pipeline.length - 1].outputs.primary };
 	const drawToScreen = regl({ uniforms: screenUniforms });
 	await Promise.all(pipeline.map((step) => step.ready));
@@ -112,9 +98,6 @@ export default async (canvas, config) => {
 			}
 		}
 
-		if (config.useCamera) {
-			cameraTex(cameraCanvas);
-		}
 		if (dimensions.width !== viewportWidth || dimensions.height !== viewportHeight) {
 			dimensions.width = viewportWidth;
 			dimensions.height = viewportHeight;
