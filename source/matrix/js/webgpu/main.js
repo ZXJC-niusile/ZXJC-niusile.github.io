@@ -5,10 +5,7 @@ import makeRain from "./rainPass.js";
 import makeBloomPass from "./bloomPass.js";
 import makePalettePass from "./palettePass.js";
 import makeStripePass from "./stripePass.js";
-import makeImagePass from "./imagePass.js";
-import makeMirrorPass from "./mirrorPass.js";
 import makeEndPass from "./endPass.js";
-import { setupCamera, cameraCanvas, cameraAspectRatio, cameraSize } from "../camera.js";
 
 const loadJS = (src) =>
 	new Promise((resolve, reject) => {
@@ -28,8 +25,6 @@ const effects = {
 	pride: makeStripePass,
 	transPride: makeStripePass,
 	trans: makeStripePass,
-	image: makeImagePass,
-	mirror: makeMirrorPass,
 };
 
 export default async (canvas, config) => {
@@ -47,10 +42,6 @@ export default async (canvas, config) => {
 				document.exitFullscreen();
 			}
 		};
-	}
-
-	if (config.useCamera) {
-		await setupCamera();
 	}
 
 	const canvasFormat = navigator.gpu.getPreferredCanvasFormat();
@@ -71,11 +62,6 @@ export default async (canvas, config) => {
 
 	const timeUniforms = structs.from(`struct Time { seconds : f32, frames : i32, };`).Time;
 	const timeBuffer = makeUniformBuffer(device, timeUniforms);
-	const cameraTex = device.createTexture({
-		size: cameraSize,
-		format: "rgba8unorm",
-		usage: GPUTextureUsage.TEXTURE_BINDING | GPUTextureUsage.COPY_DST | GPUTextureUsage.RENDER_ATTACHMENT,
-	});
 
 	const context = {
 		config,
@@ -84,9 +70,6 @@ export default async (canvas, config) => {
 		canvasContext,
 		timeBuffer,
 		canvasFormat,
-		cameraTex,
-		cameraAspectRatio,
-		cameraSize,
 	};
 
 	const effectName = config.effect in effects ? config.effect : "palette";
@@ -122,10 +105,6 @@ export default async (canvas, config) => {
 			canvas.width = canvasWidth;
 			canvas.height = canvasHeight;
 			outputs = pipeline.build(canvasSize);
-		}
-
-		if (config.useCamera) {
-			device.queue.copyExternalImageToTexture({ source: cameraCanvas }, { texture: cameraTex }, cameraSize);
 		}
 
 		device.queue.writeBuffer(timeBuffer, 0, timeUniforms.toBuffer({ seconds: (now - start) / 1000, frames }));
