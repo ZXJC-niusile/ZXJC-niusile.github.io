@@ -29,15 +29,6 @@
   </url>
   
   <url>
-    <loc>https://zxjc-niusile.github.io/projects/index.html</loc>
-    
-    <lastmod>2026-02-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://zxjc-niusile.github.io/thinking/index.html</loc>
     
     <lastmod>2026-02-14</lastmod>
@@ -47,16 +38,7 @@
   </url>
   
   <url>
-    <loc>https://zxjc-niusile.github.io/matrix/index.html</loc>
-    
-    <lastmod>2026-02-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://zxjc-niusile.github.io/matrix/README.html</loc>
+    <loc>https://zxjc-niusile.github.io/projects/index.html</loc>
     
     <lastmod>2026-02-14</lastmod>
     
@@ -108,13 +90,6 @@
 
   
   <url>
-    <loc>https://zxjc-niusile.github.io/categories/Datawhale/</loc>
-    <lastmod>2026-06-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -122,14 +97,21 @@
   </url>
   
   <url>
-    <loc>https://zxjc-niusile.github.io/categories/Datawhale/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Datawhale/</loc>
     <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Datawhale/</loc>
+    <loc>https://zxjc-niusile.github.io/categories/Datawhale/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zxjc-niusile.github.io/categories/Datawhale/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
