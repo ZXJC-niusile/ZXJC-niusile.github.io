@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://zxjc-niusile.github.io/index.html</loc>
+    <loc>https://zxjc-niusile.github.io/</loc>
     
     <lastmod>2026-06-24</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://zxjc-niusile.github.io/thinking/index.html</loc>
+    <loc>https://zxjc-niusile.github.io/thinking/</loc>
     
     <lastmod>2026-02-14</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://zxjc-niusile.github.io/projects/index.html</loc>
+    <loc>https://zxjc-niusile.github.io/projects/</loc>
     
     <lastmod>2026-02-14</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://zxjc-niusile.github.io/about/index.html</loc>
+    <loc>https://zxjc-niusile.github.io/about/</loc>
     
     <lastmod>2026-02-14</lastmod>
     
@@ -90,20 +90,6 @@
 
   
   <url>
-    <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2026-06-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Datawhale/</loc>
-    <lastmod>2026-06-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://zxjc-niusile.github.io/categories/Datawhale/</loc>
     <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
@@ -111,7 +97,21 @@
   </url>
   
   <url>
+    <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://zxjc-niusile.github.io/categories/Datawhale/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Datawhale/</loc>
     <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
