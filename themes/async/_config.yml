@@ -167,7 +167,7 @@ footer:
     enable: false # 启用
     icp: # 备案号
   # Copyright date
-  copyright_year: # 版权日期
+  copyright_year: 2025-2026 # 版权日期
   #
   live_time: # 运行时间
     enable: true # 启用
