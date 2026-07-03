@@ -449,45 +449,54 @@ if (window.innerWidth <= 767) {
         </h5>
     </div>
     
-        <div class="col-lg-6">
-    <div class="trm-blog-card trm-scroll-animation">
-        <a href="/2025/02/14/Datawhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5/" class="trm-cover-frame trm-anima-link">
-            
-            
-                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
-            
-        </a>
-        
-        <div class="trm-card-descr">
-            <div class="trm-label trm-category trm-mb-20">
-                <a href="/categories/Datawhale/">
-                    Datawhale
-                </a>
-            </div>
-            <h5>
-                <a href="/2025/02/14/Datawhale%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5/" class="trm-anima-link">
-                    Datawhale 学习笔记
-                </a>
-            </h5>
-            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
-            <ul class="trm-card-data trm-label">
-                <li>25/02/14</li>
-                <li>22:00</li>
-                
-                    <li>117</li>
-                
-                
-                    <li>1</li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
-    
     
 </div>
 
     
+
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": 'ZXJC-niusile/ZXJC-niusile.github.io',
+            "data-repo-id": 'R_kgDOO_wOjQ',
+            "data-category": 'Announcements',
+            "data-category-id": 'DIC_kwDOO_wOjc4DAS4F',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
 
 
 

@@ -140,8 +140,6 @@ export default ({ regl, config }) => {
 	// We render the code into an FBO using MSDFs: https://github.com/Chlumsky/msdfgen
 	const glyphMSDF = loadImage(regl, config.glyphMSDFURL);
 	const glintMSDF = loadImage(regl, config.glintMSDFURL);
-	const baseTexture = loadImage(regl, config.baseTextureURL, true);
-	const glintTexture = loadImage(regl, config.glintTextureURL, true);
 	const rainPassVert = loadText("shaders/glsl/rainPass.vert.glsl");
 	const rainPassFrag = loadText("shaders/glsl/rainPass.frag.glsl");
 	const output = makePassFBO(regl, config.useHalfFloat);
@@ -156,8 +154,6 @@ export default ({ regl, config }) => {
 			"baseContrast",
 			"glintBrightness",
 			"glintContrast",
-			"hasBaseTexture",
-			"hasGlintTexture",
 			"brightnessThreshold",
 			"brightnessOverride",
 			"isolateCursor",
@@ -193,8 +189,6 @@ export default ({ regl, config }) => {
 			effectState: effectDoubleBuffer.front,
 			glyphMSDF: glyphMSDF.texture,
 			glintMSDF: glintMSDF.texture,
-			baseTexture: baseTexture.texture,
-			glintTexture: glintTexture.texture,
 
 			msdfPxRange: 4.0,
 			glyphMSDFSize: () => [glyphMSDF.width(), glyphMSDF.height()],
@@ -238,8 +232,6 @@ export default ({ regl, config }) => {
 		Promise.all([
 			glyphMSDF.loaded,
 			glintMSDF.loaded,
-			baseTexture.loaded,
-			glintTexture.loaded,
 			rainPassIntro.loaded,
 			rainPassRaindrop.loaded,
 			rainPassSymbol.loaded,

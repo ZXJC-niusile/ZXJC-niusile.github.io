@@ -254,11 +254,11 @@ comment:
     # region: # 环境地域，默认为 ap-shanghai，如果您的环境地域不是上海，需传此参数
     # option: # 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
   giscus:
-    enable: false
-    repo:
-    repo-id:
-    category:
-    category-id:
+    enable: true
+    repo: ZXJC-niusile/ZXJC-niusile.github.io
+    repo-id: R_kgDOO_wOjQ
+    category: Announcements
+    category-id: DIC_kwDOO_wOjc4DAS4F
     mapping: pathname
     reactions-enabled: 1
     emit-metadata: 0

@@ -11,9 +11,6 @@ const hsl = (...values) => ({ space: "hsl", values });
 const defaults = {
 	font: "matrixcode",
 	effect: "palette",
-	baseTexture: null,
-	glintTexture: null,
-	useCamera: false,
 	backgroundColor: hsl(0, 0, 0),
 	isolateCursor: true,
 	cursorColor: hsl(0.242, 1, 0.73),
@@ -62,10 +59,8 @@ const defaults = {
 	slant: 0,
 	resolution: 0.75,
 	useHalfFloat: false,
-	renderer: "regl",
 	suppressWarnings: false,
 	isometric: false,
-	useHoloplay: false,
 	loops: false,
 	skipIntro: true,
 	testFix: null,
@@ -176,8 +171,6 @@ const versions = {
 	},
 	trinity: {
 		font: "matrixcode",
-		glintTexture: "metal",
-		baseTexture: "pixels",
 		glyphEdgeCrop: 0.1,
 		cursorColor: hsl(0.292, 1, 0.8),
 		cursorIntensity: 2,
@@ -205,8 +198,6 @@ const versions = {
 	},
 	morpheus: {
 		font: "matrixcode",
-		glintTexture: "mesh",
-		baseTexture: "metal",
 		glyphEdgeCrop: 0.1,
 		cursorColor: hsl(0.333, 1, 0.85),
 		cursorIntensity: 2,
@@ -234,8 +225,6 @@ const versions = {
 	},
 	bugs: {
 		font: "matrixcode",
-		glintTexture: "sand",
-		baseTexture: "metal",
 		glyphEdgeCrop: 0.1,
 		cursorColor: hsl(0.619, 1, 0.65),
 		cursorIntensity: 2,
@@ -294,7 +283,6 @@ const versions = {
 
 	holoplay: {
 		font: "matrixcode",
-		glintTexture: "metal",
 		glyphEdgeCrop: 0.1,
 		cursorColor: hsl(0.292, 1, 0.8),
 		cursorIntensity: 2,
@@ -316,14 +304,12 @@ const versions = {
 		cycleSpeed: 0.01,
 		raindropLength: 0.3,
 
-		renderer: "regl",
 		numColumns: 20,
 		ditherMagnitude: 0,
 		bloomStrength: 0,
 		volumetric: true,
 		forwardSpeed: 0,
 		density: 3,
-		useHoloplay: true,
 	},
 
 	["3d"]: {
@@ -416,7 +402,6 @@ const paramMapping = {
 		key: "ditherMagnitude",
 		parser: (s) => nullNaN(range(parseFloat(s), 0, 1)),
 	},
-	url: { key: "bgURL", parser: (s) => s },
 	palette: { key: "palette", parser: parsePalette(false) },
 	stripeColors: { key: "stripeColors", parser: parseColors(false) },
 	backgroundColor: { key: "backgroundColor", parser: parseColor(false) },
@@ -434,11 +419,6 @@ const paramMapping = {
 		parser: (s) => nullNaN(range(parseFloat(s), 0, Infinity)),
 	},
 
-	glyphIntensity: {
-		key: "glyphIntensity",
-		parser: (s) => nullNaN(range(parseFloat(s), 0, Infinity)),
-	},
-
 	volumetric: { key: "volumetric", parser: isTrue },
 	glyphFlip: { key: "glyphFlip", parser: isTrue },
 	glyphRotation: {
@@ -448,7 +428,6 @@ const paramMapping = {
 	loops: { key: "loops", parser: isTrue },
 	fps: { key: "fps", parser: (s) => nullNaN(range(parseFloat(s), 0, 60)) },
 	skipIntro: { key: "skipIntro", parser: isTrue },
-	renderer: { key: "renderer", parser: (s) => s },
 	suppressWarnings: { key: "suppressWarnings", parser: isTrue },
 	once: { key: "once", parser: isTrue },
 	isometric: { key: "isometric", parser: isTrue },
@@ -484,10 +463,6 @@ export default (urlParams) => {
 
 		if (validParams.glintColor == null) {
 			validParams.glintColor = hsl(0, 0, 1);
-		}
-
-		if (validParams.glyphIntensity == null) {
-			validParams.glyphIntensity = 1;
 		}
 	}
 

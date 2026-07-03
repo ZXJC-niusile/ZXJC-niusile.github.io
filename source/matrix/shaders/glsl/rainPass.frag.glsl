@@ -6,10 +6,9 @@ precision lowp float;
 
 uniform sampler2D raindropState, symbolState, effectState;
 uniform float numColumns, numRows;
-uniform sampler2D glyphMSDF, glintMSDF, baseTexture, glintTexture;
+uniform sampler2D glyphMSDF, glintMSDF;
 uniform float msdfPxRange;
 uniform vec2 glyphMSDFSize, glintMSDFSize;
-uniform bool hasBaseTexture, hasGlintTexture;
 uniform float glyphHeightToWidth, glyphSequenceLength, glyphEdgeCrop;
 uniform float baseContrast, baseBrightness, glintContrast, glintBrightness;
 uniform float brightnessOverride, brightnessThreshold;
@@ -73,13 +72,7 @@ vec3 getBrightness(vec4 raindrop, vec4 effect, float quadDepth, vec2 uv) {
 
 	vec2 textureUV = fract(uv * vec2(numColumns, numRows));
 	base = base * baseContrast + baseBrightness;
-	if (hasBaseTexture) {
-		base *= texture2D(baseTexture, textureUV).r;
-	}
 	glint = glint * glintContrast + glintBrightness;
-	if (hasGlintTexture) {
-		glint *= texture2D(glintTexture, textureUV).r;
-	}
 
 	// Modes that don't fade glyphs set their actual brightness here
 	if (brightnessOverride > 0. && base > brightnessThreshold && !isCursor) {
