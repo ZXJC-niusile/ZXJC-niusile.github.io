@@ -13,9 +13,9 @@ open_graph: false # 启用
 
 # User info | 用户信息
 user:
-  name: 松鹤🐱院 # Nickname | 昵称
+  name: 松鹤猫院 # Nickname | 昵称
   first_name: 松鹤 # 名
-  last_name: 🐱院 # 姓
+  last_name: 猫院 # 姓
   email: 2632590648@qq.com # email | 电子邮箱
   domain: https://ZXJC-niusile.github.io # Domain | 站点域名
   avatar: /img/avatar.jpg # Avatar | 站点头像
