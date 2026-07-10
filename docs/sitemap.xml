@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zxjc-niusile.github.io/about/</loc>
+    
+    <lastmod>2026-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://zxjc-niusile.github.io/</loc>
     
     <lastmod>2026-06-24</lastmod>
@@ -37,19 +46,10 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://zxjc-niusile.github.io/about/</loc>
-    
-    <lastmod>2026-02-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://zxjc-niusile.github.io/</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -57,14 +57,14 @@
   
   <url>
     <loc>https://zxjc-niusile.github.io/tags/Datawhale/</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zxjc-niusile.github.io/tags/%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -73,14 +73,14 @@
   
   <url>
     <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://zxjc-niusile.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Datawhale/</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
