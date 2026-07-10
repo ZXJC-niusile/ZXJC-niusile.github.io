@@ -24,7 +24,7 @@ user:
 # Individually configured friend link information | 友链说明配置
 links_info:
   name: 无径之巅 冰湖回响 # Site title | 站点标题
-  url: https://ZXJC-niusile.github.io # Site url | 站点地址
+  url: https://ZXJC-niusile.github.io/links/ # Site url | 站点地址
   avatar: /img/avatar.jpg # Site avatar | 友链头像
   describe: 一个初学者的学习笔记与日常记录 # Describe | 友链介绍
   rule_text: 欢迎交换友链，请确保您的网站内容积极向上。 # 友链规则
@@ -99,6 +99,8 @@ top_bars: # <object[]> {{"title":标题":"","url":地址":"","noswup":不使用 
     url: /thinking/
   - title: PROJECTS
     url: /projects/
+  - title: LINKS
+    url: /links/
   - title: ABOUT
     url: /about/
 
