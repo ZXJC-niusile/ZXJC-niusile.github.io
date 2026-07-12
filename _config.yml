@@ -7,7 +7,7 @@ title: 无径之巅 冰湖回响
 subtitle: '在无人处找路的思维褶皱'
 description: '松鹤猫院的技术博客，聚焦编程实践与算法探索，记录初学者的学习路径与技术沉淀。'
 keywords:
-author: 扎西尖措
+author: 松鹤猫院
 language: zh-Hans
 timezone: 'Asia/Shanghai'
 
@@ -32,7 +32,6 @@ skip_render:
   - "landing/**"
   - "matrix/**"
   - "js/**"
-  - "css/**"
   - "assets/**"
   - "robots.txt"
 

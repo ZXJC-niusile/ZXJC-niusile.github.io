@@ -1,9 +1,422 @@
+<%
+function getCategoryColor(name) {
+    var hash = 0;
+    for (var i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    var hue = Math.abs(hash) % 360;
+    return 'hsl(' + hue + ', 65%, 55%)';
+}
+
+function renderCategoryCard(cat, depth) {
+    var sortedPosts = cat.posts.sort('date', -1).toArray();
+    var recentPosts = sortedPosts.slice(0, 4);
+    var totalPosts = cat.posts.length;
+    var accent = getCategoryColor(cat.name);
+    var hasChildren = cat.children && cat.children.length > 0;
+%>
+    <div class="trm-category-card trm-card" data-depth="<%= depth %>" style="--accent: <%= accent %>">
+        <a href="<%- url_for(cat.path) %>" class="trm-category-card-overlay" aria-label="<%= cat.name %>"></a>
+
+        <div class="trm-category-card-header">
+            <div class="trm-category-icon">
+                <i class="fas fa-folder-open"></i>
+            </div>
+            <div class="trm-category-meta-block">
+                <h3 class="trm-category-name"><%= cat.name %></h3>
+                <div class="trm-category-stats">
+                    <span class="trm-category-stat">
+                        <i class="far fa-file-alt"></i>
+                        <strong><%= totalPosts %></strong> 篇
+                    </span>
+                    <% if (recentPosts.length > 0) { %>
+                    <span class="trm-category-stat">
+                        <i class="far fa-clock"></i>
+                        <%= date(recentPosts[0].date, 'MM/DD') %>
+                    </span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="trm-category-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </div>
+
+        <% if (recentPosts.length > 0) { %>
+        <ul class="trm-category-recent">
+            <% recentPosts.forEach(function(p) { %>
+            <li>
+                <span class="trm-recent-dot"></span>
+                <a href="<%- url_for(p.path) %>" class="trm-recent-link">
+                    <%= p.title %>
+                </a>
+            </li>
+            <% }); %>
+            <% if (totalPosts > recentPosts.length) { %>
+            <li class="trm-recent-more">
+                <a href="<%- url_for(cat.path) %>">
+                    查看全部 <%= totalPosts %> 篇 <i class="fas fa-angle-right"></i>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+        <% } %>
+
+        <% if (hasChildren) { %>
+        <div class="trm-category-children-list">
+            <span class="trm-children-label"><i class="fas fa-level-up-alt fa-rotate-90"></i> 子分类</span>
+            <% cat.children.forEach(function(child) { %>
+                <% renderCategoryCard(child, depth + 1) %>
+            <% }); %>
+        </div>
+        <% } %>
+    </div>
+<% }
+%>
+
+<style>
+.trm-categories-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 22px;
+    padding: 8px 0 30px;
+}
+
+.trm-categories-summary {
+    margin-bottom: 24px;
+    padding: 18px 22px;
+}
+
+.trm-categories-summary-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 24px;
+    font-size: 0.95em;
+}
+
+.trm-categories-summary-item strong {
+    font-size: 1.4em;
+    background: linear-gradient(135deg, #667eea, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-right: 4px;
+}
+
+:root.dark .trm-categories-summary-item strong {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.trm-category-card {
+    position: relative;
+    padding: 22px;
+    overflow: hidden;
+    border-top: 3px solid var(--accent, rgba(102, 126, 234, 0.6));
+}
+
+.trm-category-card[data-depth="1"] {
+    margin-left: 18px;
+    border-top-style: dashed;
+    border-top-width: 2px;
+}
+
+.trm-category-card[data-depth="2"] {
+    margin-left: 36px;
+    border-top-style: dotted;
+}
+
+.trm-category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    background: var(--accent, rgba(102, 126, 234, 0.6));
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.08;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.trm-category-card:hover::before { opacity: 0.18; }
+
+.trm-category-card-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.trm-category-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+.trm-category-icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent, rgba(102, 126, 234, 0.18));
+    color: var(--accent, #667eea);
+    border-radius: 12px;
+    font-size: 1.05em;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.trm-category-card:hover .trm-category-icon {
+    transform: scale(1.08) rotate(-6deg);
+}
+
+.trm-category-meta-block { flex: 1; min-width: 0; }
+
+.trm-category-name {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--theme-color, #00283a);
+    line-height: 1.3;
+}
+
+.trm-category-card-overlay {
+    pointer-events: none;
+}
+
+.trm-category-name {
+    pointer-events: auto;
+}
+
+.trm-category-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 4px;
+    font-size: 0.82em;
+    color: var(--secondary-color, rgba(0, 40, 58, 0.7));
+}
+
+:root.dark .trm-category-stats { color: rgba(240, 240, 250, 0.65); }
+
+.trm-category-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.trm-category-stat strong {
+    color: var(--accent, #667eea);
+    font-size: 1.15em;
+    font-weight: 600;
+    margin-right: 2px;
+}
+
+.trm-category-arrow {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 50%;
+    color: var(--accent, #667eea);
+    font-size: 0.85em;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+}
+
+:root.dark .trm-category-arrow { background: rgba(240, 147, 251, 0.12); }
+
+.trm-category-card:hover .trm-category-arrow {
+    transform: translateX(4px);
+    background: var(--accent, rgba(102, 126, 234, 0.25));
+}
+
+.trm-category-recent {
+    list-style: none;
+    margin: 0;
+    padding: 14px 0 0;
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 2;
+}
+
+:root.dark .trm-category-recent {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.trm-category-recent li {
+    position: relative;
+    padding: 6px 0 6px 18px;
+    font-size: 0.88em;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.trm-recent-dot {
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent, #667eea);
+    opacity: 0.7;
+}
+
+.trm-recent-link {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: auto;
+    position: relative;
+    z-index: 3;
+}
+
+.trm-recent-link:hover {
+    color: var(--accent, #667eea);
+    transform: translateX(3px);
+}
+
+.trm-recent-more {
+    padding-top: 10px !important;
+    margin-top: 4px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.06);
+    font-size: 0.85em;
+}
+
+:root.dark .trm-recent-more { border-top-color: rgba(255, 255, 255, 0.06); }
+
+.trm-recent-more a {
+    color: var(--accent, #667eea);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.3s ease;
+    pointer-events: auto;
+    position: relative;
+    z-index: 3;
+}
+
+.trm-recent-more a:hover { gap: 8px; }
+
+.trm-category-children-list {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 2;
+}
+
+:root.dark .trm-category-children-list {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.trm-children-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78em;
+    color: var(--secondary-color, rgba(0, 40, 58, 0.55));
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.trm-children-label + .trm-category-card {
+    margin-bottom: 12px;
+}
+
+.trm-children-label + .trm-category-card:last-child {
+    margin-bottom: 0;
+}
+
+.trm-empty-categories {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--secondary-color, rgba(0, 40, 58, 0.5));
+}
+
+.trm-empty-categories i {
+    font-size: 3em;
+    margin-bottom: 16px;
+    opacity: 0.3;
+}
+
+@media (max-width: 640px) {
+    .trm-categories-page {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    .trm-category-card {
+        padding: 18px;
+    }
+    .trm-category-card[data-depth="1"] { margin-left: 8px; }
+    .trm-category-card[data-depth="2"] { margin-left: 16px; }
+    .trm-category-name { font-size: 1.05em; }
+}
+</style>
+
+<%
+var rootCats = site.categories.filter(function(c) { return c.parent === undefined; })
+                            .sort('name');
+var totalPosts = site.posts.length;
+var totalCats = rootCats.length;
+%>
+
 <div class="row">
     <div class="col-lg-12">
-        <div class="trm-card">
-            <div style="padding: 0 20px;">
-                <%- list_categories({ ulclass: "trm-tag" , liclass: "trm-tag" }) %>
-            </div>
+        <div class="trm-card trm-categories-summary">
+            <span class="trm-categories-summary-item">
+                <strong><%= totalCats %></strong> 个分类
+            </span>
+            <span class="trm-categories-summary-item">
+                <strong><%= totalPosts %></strong> 篇总计
+            </span>
+            <% if (is_current('categories')) { %>
+            <span class="trm-categories-summary-item">
+                <i class="far fa-eye"></i>
+                浏览分类总览
+            </span>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<% if (rootCats.length === 0) { %>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="trm-card trm-empty-categories">
+            <i class="far fa-folder-open"></i>
+            <p>暂无分类</p>
+        </div>
+    </div>
+</div>
+<% } %>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="trm-categories-page">
+            <% rootCats.forEach(function(cat) { %>
+                <% renderCategoryCard(cat, 0); %>
+            <% }); %>
         </div>
     </div>
 </div>

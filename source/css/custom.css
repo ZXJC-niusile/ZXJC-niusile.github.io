@@ -337,3 +337,228 @@ html.is-animating .trm-scroll-container {
 .trm-mode-swich-animation-frame {
     display: none !important;
 }
+
+/* ========================================
+   D1 滚动条 + 文字选中色
+   ======================================== */
+
+/* Webkit 滚动条 */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); }
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.5);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(102, 126, 234, 0.85); }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Firefox 滚动条 */
+* { scrollbar-width: thin; scrollbar-color: rgba(102, 126, 234, 0.5) transparent; }
+
+/* 暗色模式滚动条 */
+:root.dark ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+:root.dark ::-webkit-scrollbar-thumb { background: rgba(240, 147, 251, 0.55); }
+:root.dark ::-webkit-scrollbar-thumb:hover { background: rgba(240, 147, 251, 0.9); }
+:root.dark * { scrollbar-color: rgba(240, 147, 251, 0.55) transparent; }
+
+/* 文字选中色 */
+::selection {
+    background: rgba(102, 126, 234, 0.4);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+::-moz-selection {
+    background: rgba(102, 126, 234, 0.4);
+    color: #fff;
+}
+:root.dark ::selection {
+    background: rgba(240, 147, 251, 0.45);
+    color: #fff;
+}
+:root.dark ::-moz-selection {
+    background: rgba(240, 147, 251, 0.45);
+    color: #fff;
+}
+
+/* ========================================
+   D2 统一卡片悬浮效果
+   ======================================== */
+.trm-card,
+.trm-main-card,
+.trm-blog-card,
+.trm-about-card,
+.trm-links-card,
+.trm-footer-card {
+    transition:
+        transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        border-color 0.4s ease,
+        background 0.4s ease !important;
+}
+
+.trm-card:hover,
+.trm-main-card:hover,
+.trm-blog-card:hover,
+.trm-about-card:hover,
+.trm-links-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.14) !important;
+    border-color: rgba(102, 126, 234, 0.3) !important;
+    box-shadow:
+        0 12px 36px rgba(102, 126, 234, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+:root.dark .trm-card:hover,
+:root.dark .trm-main-card:hover,
+:root.dark .trm-blog-card:hover,
+:root.dark .trm-about-card:hover,
+:root.dark .trm-links-card:hover {
+    background: rgba(30, 30, 50, 0.55) !important;
+    border-color: rgba(240, 147, 251, 0.35) !important;
+    box-shadow:
+        0 12px 36px rgba(240, 147, 251, 0.18),
+        inset 0 0 0 1px rgba(240, 147, 251, 0.1) !important;
+}
+
+/* 项目卡特殊动效: 更强悬浮 */
+.project-card {
+    transition:
+        transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.4s ease !important;
+}
+.project-card:hover {
+    transform: translateY(-6px) !important;
+    filter: drop-shadow(0 14px 22px rgba(102, 126, 234, 0.25));
+}
+
+/* ========================================
+   D3 暗色模式精修
+   ======================================== */
+:root.dark .trm-top-bar {
+    background: rgba(8, 8, 25, 0.55) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+:root.dark .trm-sidebar {
+    background: rgba(15, 15, 30, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+:root.dark .trm-footer {
+    background: rgba(10, 10, 25, 0.5) !important;
+}
+
+:root.dark code {
+    background: rgba(255, 255, 255, 0.07) !important;
+    color: #f8d7a8 !important;
+}
+
+:root.dark pre {
+    background: rgba(15, 15, 30, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 暗色模式链接色 (排除主题动画链接) */
+:root.dark a:not(.trm-anima-link):not(.trm-no-color) {
+    color: rgba(240, 147, 251, 0.9);
+}
+:root.dark a:not(.trm-anima-link):not(.trm-no-color):hover {
+    color: rgba(245, 175, 250, 1);
+    text-shadow: 0 0 6px rgba(240, 147, 251, 0.35);
+}
+
+/* ========================================
+   D4 加载动效优化 + 阅读进度条
+   ======================================== */
+
+/* swup 页面切换: 微妙入场 */
+html.is-changing .trm-scroll-container {
+    animation: trm-page-in 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes trm-page-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* 阅读进度条 (顶部 3px 渐变条) */
+.trm-reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, #667eea, #f093fb);
+    z-index: 9999;
+    transition: width 0.08s linear;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.6);
+    pointer-events: none;
+}
+
+:root.dark .trm-reading-progress {
+    background: linear-gradient(90deg, #667eea, #f093fb, #f5576c);
+    box-shadow: 0 0 10px rgba(240, 147, 251, 0.7);
+}
+
+/* 骨架屏占位 (后续批量文章时使用) */
+.trm-skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.12) 50%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    background-size: 200% 100%;
+    animation: trm-shimmer 1.4s ease-in-out infinite;
+    border-radius: 6px;
+}
+:root.dark .trm-skeleton {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 251, 0.1) 50%,
+        rgba(255, 255, 255, 0.04) 100%
+    );
+    background-size: 200% 100%;
+}
+@keyframes trm-shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* 全局焦点可见性 (键盘可达性) */
+:focus-visible {
+    outline: 2px solid rgba(102, 126, 234, 0.6);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+:root.dark :focus-visible {
+    outline-color: rgba(240, 147, 251, 0.7);
+}
+
+/* 图片平滑加载 */
+img {
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+img[data-loading="lazy"]:not(.loaded) {
+    opacity: 0.6;
+    filter: blur(4px);
+}
+img.loaded {
+    opacity: 1;
+    filter: blur(0);
+}
