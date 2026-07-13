@@ -53,7 +53,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"zxjc-niusile.github.io","author":"松鹤猫院","root":"/","typed_text":["I've got a long way to go"],"theme_version":"2.2.6","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"/img/failure.ico","show_text":"","hide_text":"通衢平野，尘嚣无痕"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"01/26/2026 00:00:00","prefix":"本站已萌萌哒运行"},"danmu":{"enable":false,"el":".trm-banner"},"search":{"enable":true,"type":"local","href":"https://www.google.com/search?q=site:","domain":"https://ZXJC-niusile.github.io","path":"search.xml"}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2026-07-13 07:49:52"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":false,"isHome":false,"postUpdate":"2026-07-13 16:24:52"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.6" id="trm-switch-style">
@@ -291,534 +291,189 @@
     <!-- banner end -->
     <div class="container">
         <div class="row">
-            
-                <div class="trm-page-sidebar col-lg-4 hidden-sm">
-                    <!-- main card -->
-                    <div class="trm-main-card-frame trm-sidebar">
-    <div class="trm-main-card">
-        <!-- 折叠按钮（仅手机端显示） -->
-        <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
-            个人信息 <span class="toggle-icon">▼</span>
-        </button>
-        <!-- 可折叠内容区域 -->
-        <div class="sidebar-collapsible-content">
-            <!-- card header -->
-<div class="trm-mc-header">
-    <div class="trm-avatar-frame trm-mb-20">
-        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
-    </div>
-    <h5 class="trm-name trm-mb-15">
-        松鹤猫院
-    </h5>
-    
-        <div class="trm-label">
-            
-            <span class="trm-typed-text">
-                <!-- Words for theme.user.typedText -->
-            </span>
-        </div>
-    
-</div>
-<!-- card header end -->
-            <!-- sidebar social -->
-
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<div class="trm-social">
-    
-        <a href="https://github.com/ZXJC-niusile" title="Github" rel="nofollow" target="_blank">
-            <i class="iconfont fab fa-github"></i>
-        </a>
-    
-</div>
-
-<!-- sidebar social end -->
-            <!-- info -->
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<ul class="trm-table trm-mb-20">
-    
-        <li>
-            <div class="trm-label">
-                Residence:
-            </div>
-            <div class="trm-label trm-label-light">
-                Mars
-            </div>
-        </li>
-    
-        <li>
-            <div class="trm-label">
-                City:
-            </div>
-            <div class="trm-label trm-label-light">
-                Beijing
-            </div>
-        </li>
-    
-        <li>
-            <div class="trm-label">
-                Age:
-            </div>
-            <div class="trm-label trm-label-light">
-                21
-            </div>
-        </li>
-    
-</ul>
-<!-- info end -->
-
-            
-    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
-    <!-- action button -->
-    <div class="text-center">
-        <a href="mailto:2632590648@qq.com" class="trm-btn">
-            联系我
-            <i class="iconfont far fa-envelope"></i>
-        </a>
-    </div>
-    <!-- action button end -->
-
-        </div>
-    </div>
-</div>
-
-<script>
-function toggleSidebar() {
-    const btn = document.querySelector('.sidebar-toggle-btn');
-    const content = document.querySelector('.sidebar-collapsible-content');
-    btn.classList.toggle('collapsed');
-    content.classList.toggle('collapsed');
-}
-
-// 默认在手机端折叠
-if (window.innerWidth <= 767) {
-    document.addEventListener('DOMContentLoaded', function() {
-        const btn = document.querySelector('.sidebar-toggle-btn');
-        const content = document.querySelector('.sidebar-collapsible-content');
-        if (btn && content) {
-            btn.classList.add('collapsed');
-            content.classList.add('collapsed');
-        }
-    });
-}
-</script>
-                    <!-- main card end -->
-                </div>
-            
-            <div class="trm-page-content col-lg-8">
+            <div class="trm-page-content col-lg-12">
                 <div id="trm-content" class="trm-content">
                     
-<div class="row">
-    <div class="col-lg-12">
-        <div class="trm-card">
-            <div class="trm-archive-filters-wrap">
-
-                
-
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <style>
-.trm-archive-filters-wrap { padding: 5px 0; }
-.trm-filter-section { margin-bottom: 24px; }
-.trm-filter-section:last-child { margin-bottom: 0; }
-
-.trm-filter-title {
-    font-size: 1.05em;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--theme-color, #00283a);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.trm-archive-editorial {
+    padding: 30px 0 60px;
+    color: var(--primary-color, rgba(255, 255, 255, 0.95));
 }
 
-.trm-filter-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+.trm-archive-heading {
+    font-size: 3.4em;
+    font-weight: 200;
+    letter-spacing: -1.5px;
+    margin: 20px 0 50px;
+    line-height: 1.1;
 }
 
-.trm-filter-tags .trm-tag {
-    padding: 5px 14px;
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(175, 180, 43, 0.3);
-    border-radius: 18px;
-    font-size: 0.88em;
-    transition: all 0.3s ease;
-    text-decoration: none;
+.trm-archive-meta {
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.6));
+    margin-bottom: 60px;
 }
 
-.trm-filter-tags .trm-tag:hover,
-.trm-filter-tags .trm-tag.active {
-    background: rgba(175, 180, 43, 0.25);
-    border-color: rgba(175, 180, 43, 0.55);
-    color: var(--theme-color);
+.trm-archive-section {
+    padding: 20px 0 30px;
+    border-top: 1px solid var(--border, rgba(255, 255, 255, 0.2));
 }
 
-.trm-category-tree { max-height: 380px; overflow-y: auto; padding-right: 4px; }
-.trm-category-item { position: relative; margin: 4px 0; }
-.trm-category-item > a {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 12px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-.trm-category-item > a:hover { background: rgba(0, 0, 0, 0.05); }
-.trm-category-item > a.active { color: var(--theme-color); font-weight: 600; }
-.trm-category-item .post-count {
-    margin-left: 8px;
-    font-size: 0.78em;
-    opacity: 0.6;
-    background: rgba(0, 0, 0, 0.08);
-    padding: 1px 8px;
-    border-radius: 10px;
-}
-.trm-category-item .tree-toggle {
-    cursor: pointer;
-    font-size: 0.7em;
-    margin-right: 6px;
-    transition: transform 0.3s ease;
-    display: inline-block;
-    width: 16px;
-    text-align: center;
-}
-.trm-category-item .tree-toggle.expanded { transform: rotate(90deg); }
-.trm-category-children { display: none; }
-.trm-category-children.show { display: block; }
-
-:root.dark .trm-filter-tags .trm-tag { background: rgba(255, 255, 255, 0.05); }
-:root.dark .trm-filter-tags .trm-tag:hover,
-:root.dark .trm-filter-tags .trm-tag.active { background: rgba(255, 255, 255, 0.1); }
-:root.dark .trm-category-item > a:hover { background: rgba(255, 255, 255, 0.06); }
-:root.dark .trm-category-item .post-count { background: rgba(255, 255, 255, 0.08); }
-
-/* ========== 按月分组时间线 ========== */
-.trm-archive-section { padding: 10px 0 30px; }
-
-.trm-archive-title {
-    font-size: 1.6em;
-    font-weight: 700;
-    margin: 16px 0 24px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid rgba(102, 126, 234, 0.3);
-    color: var(--theme-color, #00283a);
-}
-
-:root.dark .trm-archive-title {
-    border-bottom-color: rgba(240, 147, 251, 0.3);
-}
-
-.trm-year-block { margin-bottom: 30px; }
-
-.trm-year-heading {
-    font-size: 2.2em;
-    font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 16px 0 18px;
-    letter-spacing: -1px;
-}
-
-:root.dark .trm-year-heading {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+.trm-year-mark {
+    font-size: 7em;
+    font-weight: 100;
+    line-height: 0.85;
+    margin: 16px 0 36px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.4));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.trm-month-block {
-    margin-bottom: 18px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: all 0.3s ease;
+:root.dark .trm-year-mark {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(201, 164, 255, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.trm-month-block:hover {
-    border-color: rgba(102, 126, 234, 0.25);
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+.trm-month-mark {
+    font-size: 1em;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border, rgba(255, 255, 255, 0.15));
 }
 
-:root.dark .trm-month-block {
-    background: rgba(15, 15, 30, 0.55);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-:root.dark .trm-month-block:hover {
-    border-color: rgba(240, 147, 251, 0.3);
-    box-shadow: 0 8px 24px rgba(240, 147, 251, 0.12);
-}
-
-.trm-month-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.3s ease;
-}
-
-.trm-month-header:hover { background: rgba(255, 255, 255, 0.04); }
-:root.dark .trm-month-header:hover { background: rgba(255, 255, 255, 0.03); }
-
-.trm-month-toggle {
-    font-size: 0.85em;
-    color: rgba(102, 126, 234, 0.9);
-    transition: transform 0.3s ease;
-}
-
-:root.dark .trm-month-toggle { color: rgba(240, 147, 251, 0.9); }
-
-.trm-month-block.collapsed .trm-month-toggle { transform: rotate(-90deg); }
-
-.trm-month-name {
-    flex: 1;
-    font-size: 1.05em;
-    font-weight: 600;
-    color: var(--theme-color);
-}
-
-.trm-month-label-en {
-    font-size: 0.85em;
-    opacity: 0.55;
-    margin-left: 6px;
-    font-family: 'JetBrains Mono', 'Consolas', monospace;
-}
-
-.trm-month-count {
-    font-size: 0.85em;
-    padding: 3px 10px;
-    background: rgba(102, 126, 234, 0.18);
-    color: #667eea;
-    border-radius: 12px;
-    font-weight: 500;
-}
-
-:root.dark .trm-month-count {
-    background: rgba(240, 147, 251, 0.18);
-    color: rgba(240, 147, 251, 1);
-}
-
-.trm-month-posts {
+.trm-archive-list {
     list-style: none;
-    margin: 0;
-    padding: 6px 0 12px;
-    overflow: hidden;
-    max-height: 3000px;
-    transition: max-height 0.45s ease, padding 0.3s ease, opacity 0.3s ease;
-    opacity: 1;
-}
-
-.trm-month-block.collapsed .trm-month-posts {
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    opacity: 0;
-}
-
-.trm-post-item {
     margin: 0;
     padding: 0;
 }
 
-.trm-post-link {
+.trm-archive-row {
     display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 10px 24px;
-    text-decoration: none;
-    color: var(--theme-color);
-    transition: all 0.3s ease;
-    border-left: 2px solid transparent;
+    align-items: baseline;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: padding 0.3s ease;
 }
 
-.trm-post-link:hover {
-    background: rgba(102, 126, 234, 0.08);
-    border-left-color: rgba(102, 126, 234, 0.55);
-    padding-left: 30px;
+.trm-archive-row:hover {
+    padding-left: 8px;
+    border-bottom-color: rgba(255, 255, 255, 0.18);
 }
 
-:root.dark .trm-post-link:hover {
-    background: rgba(240, 147, 251, 0.08);
-    border-left-color: rgba(240, 147, 251, 0.5);
-}
-
-.trm-post-date {
+.trm-row-date {
     flex-shrink: 0;
-    width: 50px;
+    width: 60px;
     font-family: 'JetBrains Mono', 'Consolas', monospace;
     font-size: 0.82em;
-    color: rgba(102, 126, 234, 0.85);
-    text-align: left;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    text-align: right;
 }
 
-:root.dark .trm-post-date { color: rgba(240, 147, 251, 0.85); }
-
-.trm-post-title-text {
+.trm-row-link {
     flex: 1;
-    font-size: 0.95em;
+    font-size: 1.15em;
     color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 300;
 }
 
-.trm-post-tags-list {
+.trm-row-link:hover {
+    color: var(--accent, #f5b3d3);
+}
+
+.trm-row-tags {
+    flex-shrink: 0;
+    max-width: 50%;
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
     justify-content: flex-end;
-    max-width: 50%;
 }
 
-.trm-post-tag-chip {
+.trm-row-tag {
     font-size: 0.72em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
     padding: 2px 8px;
-    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.18));
     border-radius: 10px;
-    opacity: 0.75;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
-.trm-post-link:hover .trm-post-tag-chip {
-    background: rgba(102, 126, 234, 0.18);
-    opacity: 1;
+.trm-archive-row:hover .trm-row-tag {
+    border-color: var(--border-strong, rgba(255, 255, 255, 0.32));
 }
 
-:root.dark .trm-post-tag-chip { background: rgba(255, 255, 255, 0.08); }
-:root.dark .trm-post-link:hover .trm-post-tag-chip {
-    background: rgba(240, 147, 251, 0.18);
+.trm-empty {
+    padding: 80px 0;
+    text-align: center;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    font-size: 1.1em;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 @media (max-width: 640px) {
-    .trm-year-heading { font-size: 1.8em; }
-    .trm-post-link { gap: 10px; padding: 9px 16px; }
-    .trm-post-link:hover { padding-left: 22px; }
-    .trm-post-tags-list { display: none; }
-    .trm-post-date { width: 42px; font-size: 0.78em; }
+    .trm-archive-heading { font-size: 2.4em; }
+    .trm-year-mark { font-size: 4.5em; }
+    .trm-archive-row { gap: 12px; padding: 12px 0; }
+    .trm-row-tags { display: none; }
+    .trm-row-date { width: 48px; }
 }
 </style>
 
 
-<div class="row">
-    <div class="col-lg-12">
-        <h5 class="trm-title-with-divider">
-            
-                学习
-            
-            <span data-number="01"></span>
-        </h5>
-    </div>
-    <div class="col-lg-12">
-        <div class="trm-archive-section">
-            
+<div class="trm-archive-editorial">
+    <h1 class="trm-archive-heading">
+        
+            学习
+        
+    </h1>
 
-            
-                <div class="trm-year-block">
-                    <h2 class="trm-year-heading">2025</h2>
-
-                    
-                        
-                        <div class="trm-month-block" data-month="2025-2">
-                            <div class="trm-month-header">
-                                <i class="fas fa-chevron-down trm-month-toggle"></i>
-                                <span class="trm-month-name">
-                                    2月
-                                    <span class="trm-month-label-en">FEB</span>
-                                </span>
-                                <span class="trm-month-count">1 篇</span>
-                            </div>
-                            <ul class="trm-month-posts">
-                                
-                                    <li class="trm-post-item">
-                                        <a href="/2025/02/14/%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5Datawhale/" class="trm-post-link">
-                                            <span class="trm-post-date">02/14</span>
-                                            <span class="trm-post-title-text">欢迎加入 Datawhale</span>
-                                            
-                                                <span class="trm-post-tags-list">
-                                                    
-                                                        <span class="trm-post-tag-chip">Datawhale</span>
-                                                    
-                                                        <span class="trm-post-tag-chip">学习</span>
-                                                    
-                                                </span>
-                                            
-                                        </a>
-                                    </li>
-                                
-                            </ul>
-                        </div>
-                    
-                </div>
-            
-        </div>
-    </div>
-</div>
-
-<script>
-(function() {
-    const STORAGE_KEY = 'trm-archive-collapsed';
-
-    function bindMonthToggles() {
-        const blocks = document.querySelectorAll('.trm-month-block');
-        blocks.forEach(function(block) {
-            const header = block.querySelector('.trm-month-header');
-            if (!header || header.dataset.bound === '1') return;
-            header.dataset.bound = '1';
-
-            header.addEventListener('click', function() {
-                block.classList.toggle('collapsed');
-                try {
-                    var stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-                    var key = block.dataset.month;
-                    stored[key] = block.classList.contains('collapsed');
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-                } catch (e) { /* 静默失败 */ }
-            });
-        });
-
-        try {
-            var stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-            blocks.forEach(function(block) {
-                var key = block.dataset.month;
-                if (stored[key] === true) block.classList.add('collapsed');
-            });
-        } catch (e) { /* 静默失败 */ }
-    }
-
-    bindMonthToggles();
-
-    if (window.Swup && window.Swup.hooks) {
-        window.document.addEventListener('swup:contentReplaced', function() {
-            setTimeout(bindMonthToggles, 10);
-        });
-    }
-
-    const treeToggles = document.querySelectorAll('.tree-toggle');
-    treeToggles.forEach(function(toggle) {
-        toggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const categoryName = this.dataset.category;
-            const children = document.querySelector('.trm-category-children[data-parent="' + categoryName + '"]');
-            if (children) {
-                children.classList.toggle('show');
-                this.classList.toggle('expanded');
-            }
-        });
-    });
+    <p class="trm-archive-meta">1 篇 · 按年回溯</p>
 
     
-})();
-</script>
+
+    
+        <section class="trm-archive-section">
+            <h2 class="trm-year-mark">2025</h2>
+
+            
+                <div class="trm-archive-month">
+                    <h3 class="trm-month-mark">2月</h3>
+                    <ul class="trm-archive-list">
+                        
+                            <li class="trm-archive-row">
+                                <time class="trm-row-date">02/14</time>
+                                <a href="/2025/02/14/%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5Datawhale/" class="trm-row-link">欢迎加入 Datawhale</a>
+                                
+                                    <span class="trm-row-tags">
+                                        
+                                            <span class="trm-row-tag">#Datawhale</span>
+                                        
+                                            <span class="trm-row-tag">#学习</span>
+                                        
+                                    </span>
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+        </section>
+    
+</div>
 
 
 

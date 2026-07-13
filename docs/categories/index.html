@@ -291,498 +291,153 @@
     <!-- banner end -->
     <div class="container">
         <div class="row">
-            
-                <div class="trm-page-sidebar col-lg-4 hidden-sm">
-                    <!-- main card -->
-                    <div class="trm-main-card-frame trm-sidebar">
-    <div class="trm-main-card">
-        <!-- 折叠按钮（仅手机端显示） -->
-        <button class="sidebar-toggle-btn" onclick="toggleSidebar()">
-            个人信息 <span class="toggle-icon">▼</span>
-        </button>
-        <!-- 可折叠内容区域 -->
-        <div class="sidebar-collapsible-content">
-            <!-- card header -->
-<div class="trm-mc-header">
-    <div class="trm-avatar-frame trm-mb-20">
-        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
-    </div>
-    <h5 class="trm-name trm-mb-15">
-        松鹤猫院
-    </h5>
-    
-        <div class="trm-label">
-            
-            <span class="trm-typed-text">
-                <!-- Words for theme.user.typedText -->
-            </span>
-        </div>
-    
-</div>
-<!-- card header end -->
-            <!-- sidebar social -->
-
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<div class="trm-social">
-    
-        <a href="https://github.com/ZXJC-niusile" title="Github" rel="nofollow" target="_blank">
-            <i class="iconfont fab fa-github"></i>
-        </a>
-    
-</div>
-
-<!-- sidebar social end -->
-            <!-- info -->
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<ul class="trm-table trm-mb-20">
-    
-        <li>
-            <div class="trm-label">
-                Residence:
-            </div>
-            <div class="trm-label trm-label-light">
-                Mars
-            </div>
-        </li>
-    
-        <li>
-            <div class="trm-label">
-                City:
-            </div>
-            <div class="trm-label trm-label-light">
-                Beijing
-            </div>
-        </li>
-    
-        <li>
-            <div class="trm-label">
-                Age:
-            </div>
-            <div class="trm-label trm-label-light">
-                21
-            </div>
-        </li>
-    
-</ul>
-<!-- info end -->
-
-            
-    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
-    <!-- action button -->
-    <div class="text-center">
-        <a href="mailto:2632590648@qq.com" class="trm-btn">
-            联系我
-            <i class="iconfont far fa-envelope"></i>
-        </a>
-    </div>
-    <!-- action button end -->
-
-        </div>
-    </div>
-</div>
-
-<script>
-function toggleSidebar() {
-    const btn = document.querySelector('.sidebar-toggle-btn');
-    const content = document.querySelector('.sidebar-collapsible-content');
-    btn.classList.toggle('collapsed');
-    content.classList.toggle('collapsed');
-}
-
-// 默认在手机端折叠
-if (window.innerWidth <= 767) {
-    document.addEventListener('DOMContentLoaded', function() {
-        const btn = document.querySelector('.sidebar-toggle-btn');
-        const content = document.querySelector('.sidebar-collapsible-content');
-        if (btn && content) {
-            btn.classList.add('collapsed');
-            content.classList.add('collapsed');
-        }
-    });
-}
-</script>
-                    <!-- main card end -->
-                </div>
-            
-            <div class="trm-page-content col-lg-8">
+            <div class="trm-page-content col-lg-12">
                 <div id="trm-content" class="trm-content">
-                    
-
-<style>
-.trm-categories-page {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 22px;
-    padding: 8px 0 30px;
+                    <style>
+.trm-categories-editorial {
+    padding: 30px 0 60px;
+    color: var(--primary-color, rgba(255, 255, 255, 0.95));
 }
 
-.trm-categories-summary {
-    margin-bottom: 24px;
-    padding: 18px 22px;
+.trm-categories-heading {
+    font-size: 3.4em;
+    font-weight: 200;
+    letter-spacing: -1.5px;
+    margin: 20px 0 16px;
+    line-height: 1.1;
 }
 
-.trm-categories-summary-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-right: 24px;
-    font-size: 0.95em;
+.trm-categories-meta {
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.6));
+    margin-bottom: 50px;
 }
 
-.trm-categories-summary-item strong {
-    font-size: 1.4em;
-    background: linear-gradient(135deg, #667eea, #f093fb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-right: 4px;
+.trm-category-block {
+    margin: 0 0 40px;
+    padding: 24px 0 28px;
+    border-top: 1px solid var(--border, rgba(255, 255, 255, 0.18));
+    transition: border-color 0.3s ease;
 }
 
-:root.dark .trm-categories-summary-item strong {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.trm-category-card {
-    position: relative;
-    padding: 22px;
-    overflow: hidden;
-    border-top: 3px solid var(--accent, rgba(102, 126, 234, 0.6));
-}
-
-.trm-category-card[data-depth="1"] {
-    margin-left: 18px;
-    border-top-style: dashed;
-    border-top-width: 2px;
-}
-
-.trm-category-card[data-depth="2"] {
-    margin-left: 36px;
-    border-top-style: dotted;
-}
-
-.trm-category-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 120px;
-    height: 120px;
-    background: var(--accent, rgba(102, 126, 234, 0.6));
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.08;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-}
-
-.trm-category-card:hover::before { opacity: 0.18; }
-
-.trm-category-card-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-}
-
-.trm-category-card-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-    position: relative;
-    z-index: 2;
-}
-
-.trm-category-icon {
-    flex-shrink: 0;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--accent, rgba(102, 126, 234, 0.18));
-    color: var(--accent, #667eea);
-    border-radius: 12px;
-    font-size: 1.05em;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.trm-category-card:hover .trm-category-icon {
-    transform: scale(1.08) rotate(-6deg);
-}
-
-.trm-category-meta-block { flex: 1; min-width: 0; }
-
-.trm-category-name {
-    margin: 0;
-    font-size: 1.2em;
-    font-weight: 700;
-    color: var(--theme-color, #00283a);
-    line-height: 1.3;
-}
-
-.trm-category-card-overlay {
-    pointer-events: none;
+.trm-category-block:hover {
+    border-top-color: var(--border-strong, rgba(255, 255, 255, 0.4));
 }
 
 .trm-category-name {
-    pointer-events: auto;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 0 0 8px;
+    font-size: 1.8em;
+    font-weight: 200;
+    letter-spacing: -0.5px;
+}
+
+.trm-category-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.trm-category-name a:hover {
+    color: var(--accent, #f5b3d3);
+}
+
+.trm-category-count {
+    font-size: 0.5em;
+    font-weight: 200;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    letter-spacing: 0;
 }
 
 .trm-category-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-top: 4px;
-    font-size: 0.82em;
-    color: var(--secondary-color, rgba(0, 40, 58, 0.7));
-}
-
-:root.dark .trm-category-stats { color: rgba(240, 240, 250, 0.65); }
-
-.trm-category-stat {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.trm-category-stat strong {
-    color: var(--accent, #667eea);
-    font-size: 1.15em;
-    font-weight: 600;
-    margin-right: 2px;
-}
-
-.trm-category-arrow {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 50%;
-    color: var(--accent, #667eea);
-    font-size: 0.85em;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    pointer-events: none;
-}
-
-:root.dark .trm-category-arrow { background: rgba(240, 147, 251, 0.12); }
-
-.trm-category-card:hover .trm-category-arrow {
-    transform: translateX(4px);
-    background: var(--accent, rgba(102, 126, 234, 0.25));
-}
-
-.trm-category-recent {
-    list-style: none;
-    margin: 0;
-    padding: 14px 0 0;
-    border-top: 1px dashed rgba(0, 0, 0, 0.08);
-    position: relative;
-    z-index: 2;
-}
-
-:root.dark .trm-category-recent {
-    border-top-color: rgba(255, 255, 255, 0.08);
-}
-
-.trm-category-recent li {
-    position: relative;
-    padding: 6px 0 6px 18px;
-    font-size: 0.88em;
-    line-height: 1.5;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.trm-recent-dot {
-    position: absolute;
-    left: 0;
-    top: 14px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent, #667eea);
-    opacity: 0.7;
-}
-
-.trm-recent-link {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    pointer-events: auto;
-    position: relative;
-    z-index: 3;
-}
-
-.trm-recent-link:hover {
-    color: var(--accent, #667eea);
-    transform: translateX(3px);
-}
-
-.trm-recent-more {
-    padding-top: 10px !important;
-    margin-top: 4px;
-    border-top: 1px dashed rgba(0, 0, 0, 0.06);
-    font-size: 0.85em;
-}
-
-:root.dark .trm-recent-more { border-top-color: rgba(255, 255, 255, 0.06); }
-
-.trm-recent-more a {
-    color: var(--accent, #667eea);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    transition: gap 0.3s ease;
-    pointer-events: auto;
-    position: relative;
-    z-index: 3;
-}
-
-.trm-recent-more a:hover { gap: 8px; }
-
-.trm-category-children-list {
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px dashed rgba(0, 0, 0, 0.08);
-    position: relative;
-    z-index: 2;
-}
-
-:root.dark .trm-category-children-list {
-    border-top-color: rgba(255, 255, 255, 0.08);
-}
-
-.trm-children-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    margin: 0 0 16px;
     font-size: 0.78em;
-    color: var(--secondary-color, rgba(0, 40, 58, 0.55));
-    margin-bottom: 12px;
-    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.45));
 }
 
-.trm-children-label + .trm-category-card {
-    margin-bottom: 12px;
+.trm-category-stats-item {
+    margin-right: 14px;
 }
 
-.trm-children-label + .trm-category-card:last-child {
-    margin-bottom: 0;
+.trm-category-children {
+    margin: 14px 0 0;
+    padding: 14px 0 0 20px;
+    border-left: 1px dashed var(--border, rgba(255, 255, 255, 0.15));
 }
 
-.trm-empty-categories {
+.trm-child-row {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 6px 16px 6px 0;
+    margin-right: 12px;
+}
+
+.trm-child-name {
+    font-size: 0.95em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.7));
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.trm-child-name:hover {
+    color: var(--accent, #f5b3d3);
+}
+
+.trm-child-count {
+    font-size: 0.78em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.4));
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+.trm-empty {
+    padding: 80px 0;
     text-align: center;
-    padding: 60px 20px;
-    color: var(--secondary-color, rgba(0, 40, 58, 0.5));
-}
-
-.trm-empty-categories i {
-    font-size: 3em;
-    margin-bottom: 16px;
-    opacity: 0.3;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    font-size: 1.1em;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 @media (max-width: 640px) {
-    .trm-categories-page {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-    .trm-category-card {
-        padding: 18px;
-    }
-    .trm-category-card[data-depth="1"] { margin-left: 8px; }
-    .trm-category-card[data-depth="2"] { margin-left: 16px; }
-    .trm-category-name { font-size: 1.05em; }
+    .trm-categories-heading { font-size: 2.4em; }
+    .trm-category-name { font-size: 1.4em; }
 }
 </style>
 
 
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="trm-card trm-categories-summary">
-            <span class="trm-categories-summary-item">
-                <strong>1</strong> 个分类
-            </span>
-            <span class="trm-categories-summary-item">
-                <strong>1</strong> 篇总计
-            </span>
-            
-            <span class="trm-categories-summary-item">
-                <i class="far fa-eye"></i>
-                浏览分类总览
-            </span>
-            
-        </div>
-    </div>
-</div>
+<div class="trm-categories-editorial">
+    <h1 class="trm-categories-heading">分类</h1>
+    <p class="trm-categories-meta">1 个分类 · 1 篇文章</p>
 
+    
 
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="trm-categories-page">
-            
-                
-    <div class="trm-category-card trm-card" data-depth="0" style="--accent: hsl(270, 65%, 55%)">
-        <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="trm-category-card-overlay" aria-label="学习笔记"></a>
-
-        <div class="trm-category-card-header">
-            <div class="trm-category-icon">
-                <i class="fas fa-folder-open"></i>
-            </div>
-            <div class="trm-category-meta-block">
-                <h3 class="trm-category-name">学习笔记</h3>
-                <div class="trm-category-stats">
-                    <span class="trm-category-stat">
-                        <i class="far fa-file-alt"></i>
-                        <strong>1</strong> 篇
-                    </span>
-                    
-                    <span class="trm-category-stat">
-                        <i class="far fa-clock"></i>
-                        02/14
-                    </span>
-                    
-                </div>
-            </div>
-            <div class="trm-category-arrow">
-                <i class="fas fa-arrow-right"></i>
-            </div>
-        </div>
-
-        
-        <ul class="trm-category-recent">
-            
-            <li>
-                <span class="trm-recent-dot"></span>
-                <a href="/2025/02/14/%E6%AC%A2%E8%BF%8E%E5%8A%A0%E5%85%A5Datawhale/" class="trm-recent-link">
-                    欢迎加入 Datawhale
-                </a>
-            </li>
-            
-            
-        </ul>
+    
         
 
-        
-    </div>
+        <section class="trm-category-block">
+            <h2 class="trm-category-name">
+                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                <span class="trm-category-count">1</span>
+            </h2>
 
             
-        </div>
-    </div>
+                <p class="trm-category-stats">
+                    <span class="trm-category-stats-item">起始 2025/02</span>
+                    <span class="trm-category-stats-item">最新 2025/02</span>
+                </p>
+            
+
+            
+        </section>
+    
 </div>
 
 

@@ -1,400 +1,209 @@
 /* ========================================
-   毛玻璃效果 (Glassmorphism) 样式
+   无径之巅 — 纯透明面板方案
+   不再 backdrop-filter + 半透明叠加
    ======================================== */
 
-/* ========== 全局背景设置 ========== */
-/* 使用渐变背景，你也可以换成背景图片 */
+/* ========== 全局背景 ========== */
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
+    background: linear-gradient(135deg, #2a3a8a 0%, #5a3a7a 50%, #a04a8a 100%) !important;
     background-attachment: fixed !important;
     background-size: cover !important;
     min-height: 100vh;
+    color: rgba(255, 255, 255, 0.92);
 }
 
-/* 保证内容区域正常显示 */
-.trm-app-frame {
-    position: relative;
-}
-
-/* 如果想使用背景图片，取消下面的注释并替换图片路径 */
-/*
-body {
-    background-image: url('/images/background.jpg') !important;
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-position: center !important;
-}
-*/
-
-/* 暗色模式背景 */
 :root.dark body {
-    background: linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 50%, #2d2d5a 100%) !important;
+    background: linear-gradient(135deg, #0a0e1e 0%, #13163a 50%, #1a1a3e 100%) !important;
     background-attachment: fixed !important;
     background-size: cover !important;
 }
 
-/* ========== 玻璃面板通用样式 ========== */
-/* 卡片玻璃效果 */
+/* ========== 全局排版默认值 ========== */
+:root {
+    --primary-color: rgba(255, 255, 255, 0.95);
+    --secondary-color: rgba(255, 255, 255, 0.65);
+    --theme-color: rgba(255, 255, 255, 0.95);
+    --accent: #f5b3d3;
+    --border: rgba(255, 255, 255, 0.18);
+    --border-strong: rgba(255, 255, 255, 0.32);
+}
+
+:root.dark {
+    --primary-color: rgba(255, 255, 255, 0.95);
+    --secondary-color: rgba(255, 255, 255, 0.6);
+    --theme-color: rgba(255, 255, 255, 0.96);
+    --accent: #c9a4ff;
+    --border: rgba(255, 255, 255, 0.1);
+    --border-strong: rgba(255, 255, 255, 0.2);
+}
+
+/* ========== 面板纯透明方案 ========== */
+/* 关键: 不再 .trm-card { background: rgba(255,255,255,0.08) } + backdrop-filter */
+/* 而是 background: transparent + 细边框 */
 .trm-card,
 .trm-main-card,
 .trm-blog-card,
 .trm-about-card,
 .trm-links-card,
-.trm-footer-card {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+.trm-footer-card,
+.trm-publication .trm-card {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+    border-radius: 14px;
 }
 
-/* 暗色模式卡片 */
 :root.dark .trm-card,
 :root.dark .trm-main-card,
 :root.dark .trm-blog-card,
 :root.dark .trm-about-card,
 :root.dark .trm-links-card,
-:root.dark .trm-footer-card {
-    background: rgba(0, 0, 0, 0.15) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+:root.dark .trm-footer-card,
+:root.dark .trm-publication .trm-card {
+    border-color: var(--border) !important;
 }
 
-/* 顶部导航栏玻璃效果 */
+/* 顶部导航: 透明 + 细底线 */
 .trm-top-bar {
-    background: rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 
-:root.dark .trm-top-bar {
-    background: rgba(0, 0, 0, 0.3) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-/* 侧边栏玻璃效果 */
-.trm-sidebar {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-}
-
-:root.dark .trm-sidebar {
-    background: rgba(0, 0, 0, 0.2) !important;
-}
-
-/* 内容区域透明 */
+/* 内容容器: 透明 */
 .trm-content,
-.trm-container {
+.trm-container,
+.trm-app-frame {
     background-color: transparent !important;
 }
 
-/* 页脚玻璃效果 */
+/* 页脚: 透明 + 细上边框 */
 .trm-footer {
-    background: rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border-top: 1px solid var(--border);
 }
 
-:root.dark .trm-footer {
-    background: rgba(0, 0, 0, 0.2) !important;
+/* ========== 链接 ========== */
+a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+a:hover {
+    color: var(--accent);
 }
 
-/* 文章列表项玻璃效果 */
-.trm-publication .trm-card {
-    transition: all 0.3s ease !important;
+:root.dark a:not(.trm-anima-link):not(.trm-no-color) {
+    color: rgba(255, 255, 255, 0.95);
+}
+:root.dark a:not(.trm-anima-link):not(.trm-no-color):hover {
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(201, 164, 255, 0.4);
 }
 
-.trm-publication .trm-card:hover {
-    background: rgba(255, 255, 255, 0.25) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+/* ========== 排版 ========== */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    font-weight: 400;
+    letter-spacing: -0.5px;
 }
 
-:root.dark .trm-publication .trm-card:hover {
-    background: rgba(0, 0, 0, 0.35) !important;
+p {
+    color: var(--secondary-color);
+    line-height: 1.8;
 }
 
-/* ========================================
-   自定义响应式样式 & 侧边栏折叠
-   ======================================== */
-
-/* ========== 响应式断点适配 ========== */
-
-/* 大屏幕 (>1200px) - 默认 */
-@media (min-width: 1200px) {
-    .projects-title {
-        font-size: 2.8em;
-    }
-
-    .section-title {
-        font-size: 1.6em;
-    }
+code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    color: rgba(255, 220, 200, 0.95);
 }
 
-/* 中等屏幕 (992px - 1199px) */
-@media (max-width: 1199px) and (min-width: 992px) {
-    .projects-title {
-        font-size: 2.4em;
-    }
-
-    .section-title {
-        font-size: 1.5em;
-    }
+pre {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin: 18px 0;
+    overflow-x: auto;
+}
+pre code {
+    background: transparent;
+    padding: 0;
 }
 
-/* 平板 (768px - 991px) */
-@media (max-width: 991px) and (min-width: 768px) {
-    .projects-title {
-        font-size: 2.2em;
-        margin-bottom: 40px;
-    }
-
-    .section-title {
-        font-size: 1.4em;
-        margin-bottom: 20px;
-    }
-
-    .projects-grid {
-        gap: 15px;
-    }
+:root.dark code {
+    background: rgba(255, 255, 255, 0.07);
+    color: #f8d7a8;
+}
+:root.dark pre {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: var(--border);
 }
 
-/* 手机 (<768px) */
-@media (max-width: 767px) {
-    .projects-title {
-        font-size: 1.8em;
-        margin-bottom: 30px;
-        margin-top: 20px;
-    }
-
-    .projects-title::after {
-        font-size: 0.9em;
-    }
-
-    .section-title {
-        font-size: 1.3em;
-        margin-bottom: 15px;
-    }
-
-    .section-title span {
-        transform: skewX(5deg);
-    }
-
-    .section-title span::before {
-        font-size: 0.65em;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .project-card {
-        margin-bottom: 15px;
-    }
-
-    /* 禁用手机端hover效果 */
-    .project-card:hover {
-        transform: none;
-    }
-
-    .project-card:active {
-        transform: scale(0.98);
-    }
-}
-
-/* ========== 侧边栏折叠（手机端） ========== */
-
-/* 折叠按钮样式 */
-.sidebar-toggle-btn {
-    display: none;
-    width: 100%;
-    padding: 12px 15px;
-    background: var(--theme-bg-color, #fcfcfe);
-    border: 1px solid var(--primary-30, rgba(175, 180, 43, 0.3));
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--theme-color, #00283a);
-    margin-bottom: 10px;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.sidebar-toggle-btn:hover {
-    background: var(--primary-30, rgba(175, 180, 43, 0.3));
-}
-
-.sidebar-toggle-btn .toggle-icon {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-    display: inline-block;
-}
-
-.sidebar-toggle-btn.collapsed .toggle-icon {
-    transform: rotate(180deg);
-}
-
-/* 侧边栏内容区域 */
-.sidebar-collapsible-content {
-    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
-    overflow: hidden;
-}
-
-/* 手机端显示折叠按钮和折叠功能 */
-@media (max-width: 767px) {
-    .sidebar-toggle-btn {
-        display: block;
-    }
-
-    .sidebar-collapsible-content {
-        max-height: 1000px;
-        opacity: 1;
-    }
-
-    .sidebar-collapsible-content.collapsed {
-        max-height: 0;
-        opacity: 0;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-    }
-
-    /* 侧边栏卡片在手机端的优化 */
-    .trm-main-card {
-        padding: 15px !important;
-    }
-
-    .trm-mc-header {
-        padding-bottom: 10px;
-    }
-
-    .trm-avatar-frame {
-        margin-bottom: 10px !important;
-    }
-
-    .trm-avatar {
-        width: 80px !important;
-        height: 80px !important;
-    }
-}
-
-/* 小屏手机 (<480px) */
-@media (max-width: 479px) {
-    .projects-title {
-        font-size: 1.5em;
-        margin-bottom: 25px;
-    }
-
-    .section-title {
-        font-size: 1.2em;
-    }
-
-    .section-title span::before {
-        font-size: 0.55em;
-        letter-spacing: 1px;
-    }
-}
-
-/* ========== ABOUT 页面内容下移 ========== */
-/* 避免内容与banner背景重叠 */
-.trm-publication {
-    margin-top: 30px;
-}
-
-.trm-publication .trm-card:first-child {
-    margin-top: 20px;
-}
-
-/* ABOUT页面标题样式优化 */
-.trm-publication h2:first-of-type {
-    margin-top: 15px;
-    padding-top: 10px;
-}
-
-/* ========== 抗重力特效优化 (无白屏) ========== */
-/* 隐藏进度条/加载遮罩 */
-.trm-preloader {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
-
-/* 强制内容不消失 (覆盖JS动画) */
-html.is-animating .trm-scroll-container {
-    opacity: 1 !important;
-}
-
-.trm-scroll-container {
-    transition: opacity 0.1s !important;
-    /* 极速切换 */
-}
-
-/* 隐藏过度动画遮罩 */
-.trm-mode-swich-animation,
-.trm-mode-swich-animation-frame {
-    display: none !important;
+blockquote {
+    border-left: 3px solid var(--accent);
+    background: transparent;
+    padding: 12px 20px;
+    margin: 18px 0;
+    color: var(--secondary-color);
+    font-style: italic;
 }
 
 /* ========================================
-   D1 滚动条 + 文字选中色
+   D1 滚动条 + 选中色
    ======================================== */
-
-/* Webkit 滚动条 */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.04); }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-    background: rgba(102, 126, 234, 0.5);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 4px;
     transition: background 0.3s ease;
 }
-::-webkit-scrollbar-thumb:hover { background: rgba(102, 126, 234, 0.85); }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.55); }
 ::-webkit-scrollbar-corner { background: transparent; }
 
-/* Firefox 滚动条 */
-* { scrollbar-width: thin; scrollbar-color: rgba(102, 126, 234, 0.5) transparent; }
+* { scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.25) transparent; }
 
-/* 暗色模式滚动条 */
-:root.dark ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
-:root.dark ::-webkit-scrollbar-thumb { background: rgba(240, 147, 251, 0.55); }
-:root.dark ::-webkit-scrollbar-thumb:hover { background: rgba(240, 147, 251, 0.9); }
-:root.dark * { scrollbar-color: rgba(240, 147, 251, 0.55) transparent; }
+:root.dark ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); }
+:root.dark ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.6); }
+:root.dark * { scrollbar-color: rgba(255, 255, 255, 0.3) transparent; }
 
-/* 文字选中色 */
 ::selection {
-    background: rgba(102, 126, 234, 0.4);
+    background: rgba(255, 255, 255, 0.25);
     color: #fff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 ::-moz-selection {
-    background: rgba(102, 126, 234, 0.4);
+    background: rgba(255, 255, 255, 0.25);
     color: #fff;
 }
 :root.dark ::selection {
-    background: rgba(240, 147, 251, 0.45);
+    background: rgba(201, 164, 255, 0.35);
     color: #fff;
 }
 :root.dark ::-moz-selection {
-    background: rgba(240, 147, 251, 0.45);
+    background: rgba(201, 164, 255, 0.35);
     color: #fff;
 }
 
 /* ========================================
-   D2 统一卡片悬浮效果
+   D2 统一悬浮效果 (轻量化)
    ======================================== */
 .trm-card,
 .trm-main-card,
 .trm-blog-card,
 .trm-about-card,
-.trm-links-card,
-.trm-footer-card {
+.trm-links-card {
     transition:
         transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        border-color 0.4s ease,
-        background 0.4s ease !important;
+        border-color 0.4s ease !important;
 }
 
 .trm-card:hover,
@@ -402,80 +211,20 @@ html.is-animating .trm-scroll-container {
 .trm-blog-card:hover,
 .trm-about-card:hover,
 .trm-links-card:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.14) !important;
-    border-color: rgba(102, 126, 234, 0.3) !important;
-    box-shadow:
-        0 12px 36px rgba(102, 126, 234, 0.15),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-2px);
+    border-color: var(--border-strong) !important;
 }
 
-:root.dark .trm-card:hover,
-:root.dark .trm-main-card:hover,
-:root.dark .trm-blog-card:hover,
-:root.dark .trm-about-card:hover,
-:root.dark .trm-links-card:hover {
-    background: rgba(30, 30, 50, 0.55) !important;
-    border-color: rgba(240, 147, 251, 0.35) !important;
-    box-shadow:
-        0 12px 36px rgba(240, 147, 251, 0.18),
-        inset 0 0 0 1px rgba(240, 147, 251, 0.1) !important;
-}
-
-/* 项目卡特殊动效: 更强悬浮 */
 .project-card {
-    transition:
-        transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        filter 0.4s ease !important;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
 .project-card:hover {
-    transform: translateY(-6px) !important;
-    filter: drop-shadow(0 14px 22px rgba(102, 126, 234, 0.25));
+    transform: translateY(-4px) !important;
 }
 
 /* ========================================
-   D3 暗色模式精修
+   D4 加载动效 + 阅读进度
    ======================================== */
-:root.dark .trm-top-bar {
-    background: rgba(8, 8, 25, 0.55) !important;
-    backdrop-filter: blur(16px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-:root.dark .trm-sidebar {
-    background: rgba(15, 15, 30, 0.55) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-:root.dark .trm-footer {
-    background: rgba(10, 10, 25, 0.5) !important;
-}
-
-:root.dark code {
-    background: rgba(255, 255, 255, 0.07) !important;
-    color: #f8d7a8 !important;
-}
-
-:root.dark pre {
-    background: rgba(15, 15, 30, 0.75) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-
-/* 暗色模式链接色 (排除主题动画链接) */
-:root.dark a:not(.trm-anima-link):not(.trm-no-color) {
-    color: rgba(240, 147, 251, 0.9);
-}
-:root.dark a:not(.trm-anima-link):not(.trm-no-color):hover {
-    color: rgba(245, 175, 250, 1);
-    text-shadow: 0 0 6px rgba(240, 147, 251, 0.35);
-}
-
-/* ========================================
-   D4 加载动效优化 + 阅读进度条
-   ======================================== */
-
-/* swup 页面切换: 微妙入场 */
 html.is-changing .trm-scroll-container {
     animation: trm-page-in 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -485,7 +234,6 @@ html.is-changing .trm-scroll-container {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 减少动画偏好支持 */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -495,59 +243,39 @@ html.is-changing .trm-scroll-container {
     }
 }
 
-/* 阅读进度条 (顶部 3px 渐变条) */
 .trm-reading-progress {
     position: fixed;
     top: 0;
     left: 0;
-    height: 3px;
+    height: 2px;
     width: 0;
-    background: linear-gradient(90deg, #667eea, #f093fb);
+    background: var(--accent);
     z-index: 9999;
     transition: width 0.08s linear;
-    box-shadow: 0 0 8px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
     pointer-events: none;
 }
 
-:root.dark .trm-reading-progress {
-    background: linear-gradient(90deg, #667eea, #f093fb, #f5576c);
-    box-shadow: 0 0 10px rgba(240, 147, 251, 0.7);
-}
-
-/* 骨架屏占位 (后续批量文章时使用) */
 .trm-skeleton {
     background: linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.12) 50%,
-        rgba(255, 255, 255, 0.05) 100%
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.04) 100%
     );
     background-size: 200% 100%;
     animation: trm-shimmer 1.4s ease-in-out infinite;
     border-radius: 6px;
-}
-:root.dark .trm-skeleton {
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.04) 0%,
-        rgba(255, 255, 251, 0.1) 50%,
-        rgba(255, 255, 255, 0.04) 100%
-    );
-    background-size: 200% 100%;
 }
 @keyframes trm-shimmer {
     0%   { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
 
-/* 全局焦点可见性 (键盘可达性) */
 :focus-visible {
-    outline: 2px solid rgba(102, 126, 234, 0.6);
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 4px;
-}
-:root.dark :focus-visible {
-    outline-color: rgba(240, 147, 251, 0.7);
 }
 
 /* 图片平滑加载 */
@@ -561,4 +289,43 @@ img[data-loading="lazy"]:not(.loaded) {
 img.loaded {
     opacity: 1;
     filter: blur(0);
+}
+
+/* ========== 内容区宽度(无侧栏后放宽) ========== */
+.trm-page-content {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+    .trm-page-content {
+        max-width: 1000px;
+    }
+}
+
+/* ========== 抗重力:关闭主题默认的 preloader ========== */
+.trm-preloader {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+html.is-animating .trm-scroll-container {
+    opacity: 1 !important;
+}
+
+.trm-scroll-container {
+    transition: opacity 0.1s !important;
+}
+
+.trm-mode-swich-animation,
+.trm-mode-swich-animation-frame {
+    display: none !important;
+}
+
+/* ========== 移动端响应式 ========== */
+@media (max-width: 767px) {
+    .trm-page-content {
+        max-width: 100%;
+    }
 }

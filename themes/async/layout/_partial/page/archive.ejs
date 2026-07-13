@@ -1,516 +1,207 @@
-<% if (is_archive() || is_category() || is_tag()) { %>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="trm-card">
-            <div class="trm-archive-filters-wrap">
-
-                <% if (is_archive()) { %>
-                <div class="trm-filter-section">
-                    <h6 class="trm-filter-title">
-                        <i class="fas fa-calendar-alt"></i>
-                        <%= __('title.year_archives') %>
-                    </h6>
-                    <div id="year-filter" class="trm-filter-tags">
-                        <a href="<%- url_for('/archives/') %>" class="trm-tag <%= !page.year ? 'active' : '' %>">全部</a>
-                        <%
-                        var years = [];
-                        site.posts.sort('date', -1).forEach(function(post) {
-                            var year = post.date.year();
-                            if (years.indexOf(year) === -1) {
-                                years.push(year);
-                            }
-                        });
-                        years.forEach(function(year) { %>
-                            <a href="<%- url_for('/archives/' + year + '/') %>" class="trm-tag <%= page.year == year ? 'active' : '' %>"><%= year %></a>
-                        <% }); %>
-                    </div>
-                </div>
-
-                <div class="trm-filter-section">
-                    <h6 class="trm-filter-title">
-                        <i class="fas fa-folder"></i>
-                        <%= __('title.categories') %>
-                    </h6>
-                    <div id="category-tree" class="trm-category-tree">
-                        <%
-                        var categories = site.categories.filter(function(cat) {
-                            return cat.parent === undefined;
-                        });
-
-                        function renderCategory(cat, level) {
-                            var hasChildren = cat.children && cat.children.length > 0;
-                            var activeClass = page.category === cat.name ? 'active' : '';
-                            var indent = level * 16;
-                        %>
-                            <div class="trm-category-item" style="padding-left: <%= indent %>px;">
-                                <% if (hasChildren) { %>
-                                    <i class="fas fa-chevron-right tree-toggle" data-category="<%= cat.name %>"></i>
-                                <% } else { %>
-                                    <span class="tree-indent"></span>
-                                <% } %>
-                                <a href="<%- url_for(cat.path) %>" class="trm-tag <%= activeClass %>">
-                                    <%= cat.name %>
-                                    <span class="post-count"><%= cat.posts.length %></span>
-                                </a>
-                                <% if (hasChildren) { %>
-                                    <div class="trm-category-children" data-parent="<%= cat.name %>">
-                                        <% cat.children.forEach(function(child) {
-                                            renderCategory(child, level + 1);
-                                        }); %>
-                                    </div>
-                                <% } %>
-                            </div>
-                        <% }
-
-                        categories.forEach(function(cat) {
-                            renderCategory(cat, 0);
-                        });
-                        %>
-                    </div>
-                </div>
-                <% } %>
-
-            </div>
-        </div>
-    </div>
-</div>
-<% } %>
+<%
+function groupByYearMonth(postList) {
+    var groups = {};
+    postList.forEach(function(p) {
+        var y = p.date.year();
+        var m = p.date.month() + 1;
+        if (!groups[y]) groups[y] = {};
+        if (!groups[y][m]) groups[y][m] = [];
+        groups[y][m].push(p);
+    });
+    return groups;
+}
+%>
 
 <style>
-.trm-archive-filters-wrap { padding: 5px 0; }
-.trm-filter-section { margin-bottom: 24px; }
-.trm-filter-section:last-child { margin-bottom: 0; }
-
-.trm-filter-title {
-    font-size: 1.05em;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--theme-color, #00283a);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.trm-archive-editorial {
+    padding: 30px 0 60px;
+    color: var(--primary-color, rgba(255, 255, 255, 0.95));
 }
 
-.trm-filter-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+.trm-archive-heading {
+    font-size: 3.4em;
+    font-weight: 200;
+    letter-spacing: -1.5px;
+    margin: 20px 0 50px;
+    line-height: 1.1;
 }
 
-.trm-filter-tags .trm-tag {
-    padding: 5px 14px;
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(175, 180, 43, 0.3);
-    border-radius: 18px;
-    font-size: 0.88em;
-    transition: all 0.3s ease;
-    text-decoration: none;
+.trm-archive-meta {
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.6));
+    margin-bottom: 60px;
 }
 
-.trm-filter-tags .trm-tag:hover,
-.trm-filter-tags .trm-tag.active {
-    background: rgba(175, 180, 43, 0.25);
-    border-color: rgba(175, 180, 43, 0.55);
-    color: var(--theme-color);
+.trm-archive-section {
+    padding: 20px 0 30px;
+    border-top: 1px solid var(--border, rgba(255, 255, 255, 0.2));
 }
 
-.trm-category-tree { max-height: 380px; overflow-y: auto; padding-right: 4px; }
-.trm-category-item { position: relative; margin: 4px 0; }
-.trm-category-item > a {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 12px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-.trm-category-item > a:hover { background: rgba(0, 0, 0, 0.05); }
-.trm-category-item > a.active { color: var(--theme-color); font-weight: 600; }
-.trm-category-item .post-count {
-    margin-left: 8px;
-    font-size: 0.78em;
-    opacity: 0.6;
-    background: rgba(0, 0, 0, 0.08);
-    padding: 1px 8px;
-    border-radius: 10px;
-}
-.trm-category-item .tree-toggle {
-    cursor: pointer;
-    font-size: 0.7em;
-    margin-right: 6px;
-    transition: transform 0.3s ease;
-    display: inline-block;
-    width: 16px;
-    text-align: center;
-}
-.trm-category-item .tree-toggle.expanded { transform: rotate(90deg); }
-.trm-category-children { display: none; }
-.trm-category-children.show { display: block; }
-
-:root.dark .trm-filter-tags .trm-tag { background: rgba(255, 255, 255, 0.05); }
-:root.dark .trm-filter-tags .trm-tag:hover,
-:root.dark .trm-filter-tags .trm-tag.active { background: rgba(255, 255, 255, 0.1); }
-:root.dark .trm-category-item > a:hover { background: rgba(255, 255, 255, 0.06); }
-:root.dark .trm-category-item .post-count { background: rgba(255, 255, 255, 0.08); }
-
-/* ========== 按月分组时间线 ========== */
-.trm-archive-section { padding: 10px 0 30px; }
-
-.trm-archive-title {
-    font-size: 1.6em;
-    font-weight: 700;
-    margin: 16px 0 24px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid rgba(102, 126, 234, 0.3);
-    color: var(--theme-color, #00283a);
-}
-
-:root.dark .trm-archive-title {
-    border-bottom-color: rgba(240, 147, 251, 0.3);
-}
-
-.trm-year-block { margin-bottom: 30px; }
-
-.trm-year-heading {
-    font-size: 2.2em;
-    font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 16px 0 18px;
-    letter-spacing: -1px;
-}
-
-:root.dark .trm-year-heading {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+.trm-year-mark {
+    font-size: 7em;
+    font-weight: 100;
+    line-height: 0.85;
+    margin: 16px 0 36px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.4));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.trm-month-block {
-    margin-bottom: 18px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: all 0.3s ease;
+:root.dark .trm-year-mark {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(201, 164, 255, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.trm-month-block:hover {
-    border-color: rgba(102, 126, 234, 0.25);
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+.trm-month-mark {
+    font-size: 1em;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border, rgba(255, 255, 255, 0.15));
 }
 
-:root.dark .trm-month-block {
-    background: rgba(15, 15, 30, 0.55);
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
-:root.dark .trm-month-block:hover {
-    border-color: rgba(240, 147, 251, 0.3);
-    box-shadow: 0 8px 24px rgba(240, 147, 251, 0.12);
-}
-
-.trm-month-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 20px;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.3s ease;
-}
-
-.trm-month-header:hover { background: rgba(255, 255, 255, 0.04); }
-:root.dark .trm-month-header:hover { background: rgba(255, 255, 255, 0.03); }
-
-.trm-month-toggle {
-    font-size: 0.85em;
-    color: rgba(102, 126, 234, 0.9);
-    transition: transform 0.3s ease;
-}
-
-:root.dark .trm-month-toggle { color: rgba(240, 147, 251, 0.9); }
-
-.trm-month-block.collapsed .trm-month-toggle { transform: rotate(-90deg); }
-
-.trm-month-name {
-    flex: 1;
-    font-size: 1.05em;
-    font-weight: 600;
-    color: var(--theme-color);
-}
-
-.trm-month-label-en {
-    font-size: 0.85em;
-    opacity: 0.55;
-    margin-left: 6px;
-    font-family: 'JetBrains Mono', 'Consolas', monospace;
-}
-
-.trm-month-count {
-    font-size: 0.85em;
-    padding: 3px 10px;
-    background: rgba(102, 126, 234, 0.18);
-    color: #667eea;
-    border-radius: 12px;
-    font-weight: 500;
-}
-
-:root.dark .trm-month-count {
-    background: rgba(240, 147, 251, 0.18);
-    color: rgba(240, 147, 251, 1);
-}
-
-.trm-month-posts {
+.trm-archive-list {
     list-style: none;
-    margin: 0;
-    padding: 6px 0 12px;
-    overflow: hidden;
-    max-height: 3000px;
-    transition: max-height 0.45s ease, padding 0.3s ease, opacity 0.3s ease;
-    opacity: 1;
-}
-
-.trm-month-block.collapsed .trm-month-posts {
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    opacity: 0;
-}
-
-.trm-post-item {
     margin: 0;
     padding: 0;
 }
 
-.trm-post-link {
+.trm-archive-row {
     display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 10px 24px;
-    text-decoration: none;
-    color: var(--theme-color);
-    transition: all 0.3s ease;
-    border-left: 2px solid transparent;
+    align-items: baseline;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: padding 0.3s ease;
 }
 
-.trm-post-link:hover {
-    background: rgba(102, 126, 234, 0.08);
-    border-left-color: rgba(102, 126, 234, 0.55);
-    padding-left: 30px;
+.trm-archive-row:hover {
+    padding-left: 8px;
+    border-bottom-color: rgba(255, 255, 255, 0.18);
 }
 
-:root.dark .trm-post-link:hover {
-    background: rgba(240, 147, 251, 0.08);
-    border-left-color: rgba(240, 147, 251, 0.5);
-}
-
-.trm-post-date {
+.trm-row-date {
     flex-shrink: 0;
-    width: 50px;
+    width: 60px;
     font-family: 'JetBrains Mono', 'Consolas', monospace;
     font-size: 0.82em;
-    color: rgba(102, 126, 234, 0.85);
-    text-align: left;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    text-align: right;
 }
 
-:root.dark .trm-post-date { color: rgba(240, 147, 251, 0.85); }
-
-.trm-post-title-text {
+.trm-row-link {
     flex: 1;
-    font-size: 0.95em;
+    font-size: 1.15em;
     color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 300;
 }
 
-.trm-post-tags-list {
+.trm-row-link:hover {
+    color: var(--accent, #f5b3d3);
+}
+
+.trm-row-tags {
+    flex-shrink: 0;
+    max-width: 50%;
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 6px;
     justify-content: flex-end;
-    max-width: 50%;
 }
 
-.trm-post-tag-chip {
+.trm-row-tag {
     font-size: 0.72em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
     padding: 2px 8px;
-    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.18));
     border-radius: 10px;
-    opacity: 0.75;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
-.trm-post-link:hover .trm-post-tag-chip {
-    background: rgba(102, 126, 234, 0.18);
-    opacity: 1;
+.trm-archive-row:hover .trm-row-tag {
+    border-color: var(--border-strong, rgba(255, 255, 255, 0.32));
 }
 
-:root.dark .trm-post-tag-chip { background: rgba(255, 255, 255, 0.08); }
-:root.dark .trm-post-link:hover .trm-post-tag-chip {
-    background: rgba(240, 147, 251, 0.18);
+.trm-empty {
+    padding: 80px 0;
+    text-align: center;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    font-size: 1.1em;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 @media (max-width: 640px) {
-    .trm-year-heading { font-size: 1.8em; }
-    .trm-post-link { gap: 10px; padding: 9px 16px; }
-    .trm-post-link:hover { padding-left: 22px; }
-    .trm-post-tags-list { display: none; }
-    .trm-post-date { width: 42px; font-size: 0.78em; }
+    .trm-archive-heading { font-size: 2.4em; }
+    .trm-year-mark { font-size: 4.5em; }
+    .trm-archive-row { gap: 12px; padding: 12px 0; }
+    .trm-row-tags { display: none; }
+    .trm-row-date { width: 48px; }
 }
 </style>
 
 <% if (page.posts && page.posts.length > 0) { %>
-<div class="row">
-    <div class="col-lg-12">
-        <h5 class="trm-title-with-divider">
-            <% if (page.archive) { %>
-                <%- page.year ? __('title.year_archives', page.year) : __('title.all_archives') %>
-            <% } else if (is_category()) { %>
-                <%- page.category %>
-            <% } else if (is_tag()) { %>
-                <%- page.tag %>
-            <% } %>
-            <span data-number="01"></span>
-        </h5>
-    </div>
-    <div class="col-lg-12">
-        <div class="trm-archive-section">
-            <%
-            const MONTH_NAMES_EN = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+<div class="trm-archive-editorial">
+    <h1 class="trm-archive-heading">
+        <% if (page.archive) { %>
+            <%- page.year ? __('title.year_archives', page.year) : __('title.all_archives') %>
+        <% } else if (is_category()) { %>
+            <%- page.category %>
+        <% } else if (is_tag()) { %>
+            <%- page.tag %>
+        <% } %>
+    </h1>
 
-            function groupByYearMonth(postList) {
-                var groups = {};
-                postList.forEach(function(p) {
-                    var y = p.date.year();
-                    var m = p.date.month() + 1;
-                    if (!groups[y]) groups[y] = {};
-                    if (!groups[y][m]) groups[y][m] = [];
-                    groups[y][m].push(p);
-                });
-                return groups;
-            }
+    <p class="trm-archive-meta"><%= page.posts.length %> 篇 · 按年回溯</p>
 
-            var archiveGrouped = groupByYearMonth(page.posts);
-            var sortedYears = Object.keys(archiveGrouped).map(Number).sort(function(a,b){return b-a;});
-            %>
+    <%
+    var archiveGrouped = groupByYearMonth(page.posts);
+    var sortedYears = Object.keys(archiveGrouped).map(Number).sort(function(a,b){return b-a;});
+    %>
 
-            <% sortedYears.forEach(function(y) { %>
-                <div class="trm-year-block">
-                    <h2 class="trm-year-heading"><%= y %></h2>
+    <% sortedYears.forEach(function(y) { %>
+        <section class="trm-archive-section">
+            <h2 class="trm-year-mark"><%= y %></h2>
 
-                    <% Object.keys(archiveGrouped[y]).map(Number).sort(function(a,b){return b-a;}).forEach(function(m) { %>
-                        <%
-                        var monthPosts = archiveGrouped[y][m];
-                        var monthKey = y + '-' + m;
-                        %>
-                        <div class="trm-month-block" data-month="<%= monthKey %>">
-                            <div class="trm-month-header">
-                                <i class="fas fa-chevron-down trm-month-toggle"></i>
-                                <span class="trm-month-name">
-                                    <%= m %>月
-                                    <span class="trm-month-label-en"><%= MONTH_NAMES_EN[m-1] %></span>
-                                </span>
-                                <span class="trm-month-count"><%= monthPosts.length %> 篇</span>
-                            </div>
-                            <ul class="trm-month-posts">
-                                <% monthPosts.forEach(function(p) { %>
-                                    <li class="trm-post-item">
-                                        <a href="<%- url_for(p.path) %>" class="trm-post-link">
-                                            <span class="trm-post-date"><%= date(p.date, 'MM/DD') %></span>
-                                            <span class="trm-post-title-text"><%= p.title %></span>
-                                            <% if (p.tags && p.tags.length > 0) { %>
-                                                <span class="trm-post-tags-list">
-                                                    <% p.tags.forEach(function(t) { %>
-                                                        <span class="trm-post-tag-chip"><%= t.name %></span>
-                                                    <% }); %>
-                                                </span>
-                                            <% } %>
-                                        </a>
-                                    </li>
-                                <% }); %>
-                            </ul>
-                        </div>
-                    <% }); %>
+            <% Object.keys(archiveGrouped[y]).map(Number).sort(function(a,b){return b-a;}).forEach(function(m) { %>
+                <div class="trm-archive-month">
+                    <h3 class="trm-month-mark"><%= m %>月</h3>
+                    <ul class="trm-archive-list">
+                        <% archiveGrouped[y][m].forEach(function(p) { %>
+                            <li class="trm-archive-row">
+                                <time class="trm-row-date"><%= date(p.date, 'MM/DD') %></time>
+                                <a href="<%- url_for(p.path) %>" class="trm-row-link"><%= p.title %></a>
+                                <% if (p.tags && p.tags.length > 0) { %>
+                                    <span class="trm-row-tags">
+                                        <% p.tags.forEach(function(t) { %>
+                                            <span class="trm-row-tag">#<%= t.name %></span>
+                                        <% }); %>
+                                    </span>
+                                <% } %>
+                            </li>
+                        <% }); %>
+                    </ul>
                 </div>
             <% }); %>
-        </div>
+        </section>
+    <% }); %>
+</div>
+<% } else { %>
+<div class="trm-archive-editorial">
+    <div class="trm-empty">
+        此处尚无文章 · 等你写下第一笔
     </div>
 </div>
-
-<script>
-(function() {
-    const STORAGE_KEY = 'trm-archive-collapsed';
-
-    function bindMonthToggles() {
-        const blocks = document.querySelectorAll('.trm-month-block');
-        blocks.forEach(function(block) {
-            const header = block.querySelector('.trm-month-header');
-            if (!header || header.dataset.bound === '1') return;
-            header.dataset.bound = '1';
-
-            header.addEventListener('click', function() {
-                block.classList.toggle('collapsed');
-                try {
-                    var stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-                    var key = block.dataset.month;
-                    stored[key] = block.classList.contains('collapsed');
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
-                } catch (e) { /* 静默失败 */ }
-            });
-        });
-
-        try {
-            var stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-            blocks.forEach(function(block) {
-                var key = block.dataset.month;
-                if (stored[key] === true) block.classList.add('collapsed');
-            });
-        } catch (e) { /* 静默失败 */ }
-    }
-
-    bindMonthToggles();
-
-    if (window.Swup && window.Swup.hooks) {
-        window.document.addEventListener('swup:contentReplaced', function() {
-            setTimeout(bindMonthToggles, 10);
-        });
-    }
-
-    const treeToggles = document.querySelectorAll('.tree-toggle');
-    treeToggles.forEach(function(toggle) {
-        toggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const categoryName = this.dataset.category;
-            const children = document.querySelector('.trm-category-children[data-parent="' + categoryName + '"]');
-            if (children) {
-                children.classList.toggle('show');
-                this.classList.toggle('expanded');
-            }
-        });
-    });
-
-    <% if (is_category() && page.category) { %>
-        const currentCategory = '<%= page.category %>';
-        const allChildren = document.querySelectorAll('.trm-category-children');
-        allChildren.forEach(function(childrenEl) {
-            const childLinks = childrenEl.querySelectorAll('a');
-            for (let i = 0; i < childLinks.length; i++) {
-                if (childLinks[i].getAttribute('href').includes('<%= page.category %>')) {
-                    childrenEl.classList.add('show');
-                    const toggle = document.querySelector('.tree-toggle[data-category="' + childrenEl.dataset.parent + '"]');
-                    if (toggle) toggle.classList.add('expanded');
-                    break;
-                }
-            }
-        });
-    <% } %>
-})();
-</script>
 <% } %>
 
 <%- partial(theme.layout.paginator) %>
