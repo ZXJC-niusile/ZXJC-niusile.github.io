@@ -1,0 +1,44 @@
+name: Deploy Hexo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'source/**'
+      - 'themes/**'
+      - '_config.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Clean
+        run: npx hexo clean
+
+      - name: Generate
+        run: npx hexo generate
+
+      - name: Auto-commit docs/
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          file_pattern: 'docs/*'
+          commit_message: 'chore: regenerate docs (CI build #${{ github.run_number }})'
+          push_options: '--force'
