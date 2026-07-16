@@ -266,7 +266,7 @@ comment:
     emit-metadata: 0
     lang: zh-CN
     theme:
-      light: light
+      light: transparent_dark
       dark: transparent_dark
 
 # Theme mode | 主题模式
