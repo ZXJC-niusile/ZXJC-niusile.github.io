@@ -10,7 +10,7 @@
     "server": "hexo server"
   },
   "hexo": {
-    "version": "7.3.0"
+    "version": "8.1.2"
   },
   "dependencies": {
     "hexo": "^8.1.2",
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-less": "^4.0.0"
+    "hexo-renderer-less": "^4.0.0",
+    "patch-package": "^8.0.1"
   }
 }

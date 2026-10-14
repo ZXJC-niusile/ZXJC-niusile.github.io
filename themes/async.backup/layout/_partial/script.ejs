@@ -1,0 +1,22 @@
+<!-- Plugin -->
+<%- partial('../_third-party/plugin',{ loadtype: 'js' }) %>
+
+    <% if(hexo_env('cmd') !=='server' ){ %>
+        <!-- Service Worker -->
+        <%- partial('../_third-party/sw') %>
+            <!-- baidu push -->
+            <%- partial('../_third-party/seo/baidu-push') %>
+                <% } %>
+
+                    <script id="async-script"
+                        src="<%= url_for(theme.assets.plugin.hexo_theme_async.main) %>?v=<%= theme.version %>"></script>
+
+<!-- 粒子效果脚本 (仅在非首页) -->
+                    <% if (!page.is_home) { %>
+                    <!-- 路径约定: source/js/particles/particles-effect.js 必须存在 -->
+                    <!-- 通过 _config.yml skip_render: js/** 自动复制到 docs/js/particles/ -->
+                    <script type="module" src="<%= url_for('js/particles/particles-effect.js') %>?v=<%= theme.version %>&pv=20260215b"></script>
+                    <% } %>
+
+                    <!-- CDN -->
+                    <%- partial('../_third-party/cdn',{ cdntype: 'body' }) %>

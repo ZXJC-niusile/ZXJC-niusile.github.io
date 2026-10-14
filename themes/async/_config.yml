@@ -117,20 +117,20 @@ banner:
     position: top # 同 CSS object-position
     fit: cover # 同 CSS object-fit
   index: ## 首页横幅
-    banner_title: 树深时见鹿，<br>溪午不闻钟。
-    banner_text: Hi my new friend!
+    banner_title: 山川止行，风禾尽起
+    banner_text: 功不唐捐
     video_url: # 视频地址
   archive: ## 归档页横幅
     banner_title: 云间连下榻，<br>天上接行杯。
     banner_text: The article archive
   links: ## 友链页横幅
-    banner_title: 莫愁前路无知己，<br>天下谁人不识君。
+    banner_title: 我朋友们的博客
     banner_text: A link to a friend's website
   comment: ## 评论页横幅
-    banner_title: 憉后不知天在水，<br>满船清梦压星河。
+    banner_title: 醉后不知天在水，<br>满船清梦压星河。
     banner_text: The magic tree hole
   about: ## 关于页横幅
-    banner_title: 憉后不知天在水，<br>满船清梦压星河。
+    banner_title: 醉后不知天在水，<br>满船清梦压星河。
     banner_text: About me
 
 # Sidebar settings | 侧栏
@@ -271,7 +271,7 @@ comment:
 
 # Theme mode | 主题模式
 theme:
-  switch: true # 主题切换按钮
+  switch: false # 主题切换按钮
   default: style-light # 主题默认模式 <[style-light,style-dark,auto]>
 
 # Service Worker | 渐进式应用

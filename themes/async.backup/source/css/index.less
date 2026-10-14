@@ -1,0 +1,67 @@
+:root {
+	.trm-dark-icon {
+		display: none;
+	}
+
+	&.dark {
+		.trm-dark-icon {
+			display: block;
+		}
+
+		.trm-light-icon {
+			display: none;
+		}
+	}
+}
+
+// transition mixin
+.transition-mixin(@type: all; @time: 0.4s; @easing: ease-in-out) {
+	transition: @type @time @easing;
+}
+
+//
+.ellipsis() {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+//
+.line-ellipsis(@line: 2) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: @line;
+}
+
+.click-animation {
+	&:active {
+		animation: linear 0.2s clickanimation forwards;
+	}
+}
+
+.shadow {
+	transition:
+		all 0.4s ease-in-out,
+		box-shadow 0.3s ease;
+	box-shadow: var(--box-shadow);
+
+	&:hover {
+		box-shadow: var(--box-shadow-hover);
+	}
+}
+
+@keyframes clickanimation {
+	0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(0.97);
+	}
+}
+
+@import "./_variables/index.less";
+@import "./_components/index.less";
+@import (optional) "../../../../source/_data/style/index.less";

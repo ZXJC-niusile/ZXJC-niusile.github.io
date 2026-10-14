@@ -1,0 +1,207 @@
+<%
+function groupByYearMonth(postList) {
+    var groups = {};
+    postList.forEach(function(p) {
+        var y = p.date.year();
+        var m = p.date.month() + 1;
+        if (!groups[y]) groups[y] = {};
+        if (!groups[y][m]) groups[y][m] = [];
+        groups[y][m].push(p);
+    });
+    return groups;
+}
+%>
+
+<style>
+.trm-archive-editorial {
+    padding: 30px 0 60px;
+    color: var(--primary-color, rgba(255, 255, 255, 0.95));
+}
+
+.trm-archive-heading {
+    font-size: 3.4em;
+    font-weight: 200;
+    letter-spacing: -1.5px;
+    margin: 20px 0 50px;
+    line-height: 1.1;
+}
+
+.trm-archive-meta {
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.6));
+    margin-bottom: 60px;
+}
+
+.trm-archive-section {
+    padding: 20px 0 30px;
+    border-top: 1px solid var(--border, rgba(255, 255, 255, 0.2));
+}
+
+.trm-year-mark {
+    font-size: 7em;
+    font-weight: 100;
+    line-height: 0.85;
+    margin: 16px 0 36px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+:root.dark .trm-year-mark {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(201, 164, 255, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.trm-month-mark {
+    font-size: 1em;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border, rgba(255, 255, 255, 0.15));
+}
+
+.trm-archive-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.trm-archive-row {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: padding 0.3s ease;
+}
+
+.trm-archive-row:hover {
+    padding-left: 8px;
+    border-bottom-color: rgba(255, 255, 255, 0.18);
+}
+
+.trm-row-date {
+    flex-shrink: 0;
+    width: 60px;
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    font-size: 0.82em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    text-align: right;
+}
+
+.trm-row-link {
+    flex: 1;
+    font-size: 1.15em;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 300;
+}
+
+.trm-row-link:hover {
+    color: var(--accent, #f5b3d3);
+}
+
+.trm-row-tags {
+    flex-shrink: 0;
+    max-width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: flex-end;
+}
+
+.trm-row-tag {
+    font-size: 0.72em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
+    padding: 2px 8px;
+    border: 1px solid var(--border, rgba(255, 255, 255, 0.18));
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.trm-archive-row:hover .trm-row-tag {
+    border-color: var(--border-strong, rgba(255, 255, 255, 0.32));
+}
+
+.trm-empty {
+    padding: 80px 0;
+    text-align: center;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    font-size: 1.1em;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+    .trm-archive-heading { font-size: 2.4em; }
+    .trm-year-mark { font-size: 4.5em; }
+    .trm-archive-row { gap: 12px; padding: 12px 0; }
+    .trm-row-tags { display: none; }
+    .trm-row-date { width: 48px; }
+}
+</style>
+
+<% if (page.posts && page.posts.length > 0) { %>
+<div class="trm-archive-editorial">
+    <h1 class="trm-archive-heading">
+        <% if (page.archive) { %>
+            <%- page.year ? __('title.year_archives', page.year) : __('title.all_archives') %>
+        <% } else if (is_category()) { %>
+            <%- page.category %>
+        <% } else if (is_tag()) { %>
+            <%- page.tag %>
+        <% } %>
+    </h1>
+
+    <p class="trm-archive-meta"><%= page.posts.length %> 篇 · 按年回溯</p>
+
+    <%
+    var archiveGrouped = groupByYearMonth(page.posts);
+    var sortedYears = Object.keys(archiveGrouped).map(Number).sort(function(a,b){return b-a;});
+    %>
+
+    <% sortedYears.forEach(function(y) { %>
+        <section class="trm-archive-section">
+            <h2 class="trm-year-mark"><%= y %></h2>
+
+            <% Object.keys(archiveGrouped[y]).map(Number).sort(function(a,b){return b-a;}).forEach(function(m) { %>
+                <div class="trm-archive-month">
+                    <h3 class="trm-month-mark"><%= m %>月</h3>
+                    <ul class="trm-archive-list">
+                        <% archiveGrouped[y][m].forEach(function(p) { %>
+                            <li class="trm-archive-row">
+                                <time class="trm-row-date"><%= date(p.date, 'MM/DD') %></time>
+                                <a href="<%- url_for(p.path) %>" class="trm-row-link"><%= p.title %></a>
+                                <% if (p.tags && p.tags.length > 0) { %>
+                                    <span class="trm-row-tags">
+                                        <% p.tags.forEach(function(t) { %>
+                                            <span class="trm-row-tag">#<%= t.name %></span>
+                                        <% }); %>
+                                    </span>
+                                <% } %>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </div>
+            <% }); %>
+        </section>
+    <% }); %>
+</div>
+<% } else { %>
+<div class="trm-archive-editorial">
+    <div class="trm-empty">
+        此处尚无文章 · 等你写下第一笔
+    </div>
+</div>
+<% } %>
+
+<%- partial(theme.layout.paginator) %>

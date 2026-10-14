@@ -1,0 +1,26 @@
+<div class="trm-content-start">
+    <!-- banner -->
+    <%- banner %>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                <!-- main card -->
+                <%- partial(theme.layout.sidebar) %>
+                <!-- main card end -->
+            </div>
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <%- content %>
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <%- partial(theme.layout.footer) %>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

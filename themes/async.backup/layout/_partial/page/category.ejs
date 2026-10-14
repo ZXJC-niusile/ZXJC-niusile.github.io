@@ -1,0 +1,167 @@
+<style>
+.trm-categories-editorial {
+    padding: 30px 0 60px;
+    color: var(--primary-color, rgba(255, 255, 255, 0.95));
+}
+
+.trm-categories-heading {
+    font-size: 3.4em;
+    font-weight: 200;
+    letter-spacing: -1.5px;
+    margin: 20px 0 16px;
+    line-height: 1.1;
+}
+
+.trm-categories-meta {
+    font-size: 0.85em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.6));
+    margin-bottom: 50px;
+}
+
+.trm-category-block {
+    margin: 0 0 40px;
+    padding: 24px 0 28px;
+    border-top: 1px solid var(--border, rgba(255, 255, 255, 0.18));
+    transition: border-color 0.3s ease;
+}
+
+.trm-category-block:hover {
+    border-top-color: var(--border-strong, rgba(255, 255, 255, 0.4));
+}
+
+.trm-category-name {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 0 0 8px;
+    font-size: 1.8em;
+    font-weight: 200;
+    letter-spacing: -0.5px;
+}
+
+.trm-category-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.trm-category-name a:hover {
+    color: var(--accent, #f5b3d3);
+}
+
+.trm-category-count {
+    font-size: 0.5em;
+    font-weight: 200;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.55));
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    letter-spacing: 0;
+}
+
+.trm-category-stats {
+    margin: 0 0 16px;
+    font-size: 0.78em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.45));
+}
+
+.trm-category-stats-item {
+    margin-right: 14px;
+}
+
+.trm-category-children {
+    margin: 14px 0 0;
+    padding: 14px 0 0 20px;
+    border-left: 1px dashed var(--border, rgba(255, 255, 255, 0.15));
+}
+
+.trm-child-row {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 6px 16px 6px 0;
+    margin-right: 12px;
+}
+
+.trm-child-name {
+    font-size: 0.95em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.7));
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.trm-child-name:hover {
+    color: var(--accent, #f5b3d3);
+}
+
+.trm-child-count {
+    font-size: 0.78em;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.4));
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+}
+
+.trm-empty {
+    padding: 80px 0;
+    text-align: center;
+    color: var(--secondary-color, rgba(255, 255, 255, 0.5));
+    font-size: 1.1em;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 640px) {
+    .trm-categories-heading { font-size: 2.4em; }
+    .trm-category-name { font-size: 1.4em; }
+}
+</style>
+
+<%
+var rootCats = site.categories.filter(function(c) { return c.parent === undefined; })
+                            .sort('name');
+
+function sortByDateDesc(arr) {
+    return arr.sort(function(a,b){ return b.date - a.date; });
+}
+%>
+
+<div class="trm-categories-editorial">
+    <h1 class="trm-categories-heading">分类</h1>
+    <p class="trm-categories-meta"><%= rootCats.length %> 个分类 · <%= site.posts.length %> 篇文章</p>
+
+    <% if (rootCats.length === 0) { %>
+        <div class="trm-empty">尚无分类</div>
+    <% } %>
+
+    <% rootCats.forEach(function(cat) { %>
+        <%
+        var sortedPosts = sortByDateDesc(cat.posts.toArray());
+        var totalPosts = cat.posts.length;
+        %>
+
+        <section class="trm-category-block">
+            <h2 class="trm-category-name">
+                <a href="<%- url_for(cat.path) %>"><%= cat.name %></a>
+                <span class="trm-category-count"><%= totalPosts %></span>
+            </h2>
+
+            <% if (totalPosts > 0) { %>
+                <p class="trm-category-stats">
+                    <span class="trm-category-stats-item">起始 <%= date(sortedPosts[sortedPosts.length-1].date, 'YYYY/MM') %></span>
+                    <span class="trm-category-stats-item">最新 <%= date(sortedPosts[0].date, 'YYYY/MM') %></span>
+                </p>
+            <% } %>
+
+            <% if (cat.children && cat.children.length > 0) { %>
+                <div class="trm-category-children">
+                    <% cat.children.forEach(function(child) { %>
+                        <div class="trm-child-row">
+                            <a href="<%- url_for(child.path) %>" class="trm-child-name"><%= child.name %></a>
+                            <span class="trm-child-count"><%= child.posts.length %></span>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </section>
+    <% }); %>
+</div>
